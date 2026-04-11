@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
 const attractions = [
   {
@@ -45,6 +46,46 @@ const attractions = [
   }
 ];
 
+function AttractionCard({ attr, i }: { attr: typeof attractions[0]; i: number }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [0, i % 2 === 0 ? -100 : 100]);
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ y }}
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay: i * 0.1 }}
+      className={`relative overflow-hidden rounded-3xl group ${
+        attr.size === 'lg' ? 'md:col-span-4 md:row-span-2' : 
+        attr.size === 'md' ? 'md:col-span-2 md:row-span-1' : 'md:col-span-1 md:row-span-1'
+      }`}
+    >
+      <img 
+        src={attr.image} 
+        alt={attr.title} 
+        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        onError={(e) => { e.currentTarget.src = attr.fallback; }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80" />
+      
+      <div className="absolute bottom-8 left-8 right-8">
+        <h3 className={`font-bold outfit uppercase mb-2 ${attr.size === 'lg' ? 'text-4xl' : 'text-xl'}`}>{attr.title}</h3>
+        <p className="text-zinc-400 text-sm font-light opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          {attr.desc}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
 export default function EntertainmentSection() {
   return (
     <section id="entertainment" className="py-24 px-6 md:px-24 bg-zinc-950">
@@ -63,34 +104,9 @@ export default function EntertainmentSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-6 h-[800px]">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-6 h-[1000px]">
           {attractions.map((attr, i) => (
-            <motion.div
-              key={attr.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: i * 0.1 }}
-              className={`relative overflow-hidden rounded-3xl group ${
-                attr.size === 'lg' ? 'md:col-span-4 md:row-span-2' : 
-                attr.size === 'md' ? 'md:col-span-2 md:row-span-1' : 'md:col-span-1 md:row-span-1'
-              }`}
-            >
-              <img 
-                src={attr.image} 
-                alt={attr.title} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                onError={(e) => { e.currentTarget.src = attr.fallback; }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80" />
-              
-              <div className="absolute bottom-8 left-8 right-8">
-                <h3 className={`font-bold outfit uppercase mb-2 ${attr.size === 'lg' ? 'text-4xl' : 'text-xl'}`}>{attr.title}</h3>
-                <p className="text-zinc-400 text-sm font-light opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {attr.desc}
-                </p>
-              </div>
-            </motion.div>
+            <AttractionCard key={attr.id} attr={attr} i={i} />
           ))}
         </div>
       </div>

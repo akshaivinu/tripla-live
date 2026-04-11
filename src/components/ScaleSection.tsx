@@ -39,7 +39,7 @@ function Counter({ value, duration = 2 }: { value: string; duration?: number }) 
 
 export default function ScaleSection() {
   return (
-    <section id="scale" className="py-24 px-6 md:px-24 bg-zinc-950 overflow-hidden">
+    <section id="scale" className="min-h-screen py-32 px-6 md:px-24 bg-zinc-950 flex flex-col justify-center overflow-hidden">
       <div className="max-w-7xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -60,13 +60,16 @@ export default function ScaleSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: i * 0.1 }}
-              className="glass p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-colors"
+              className="glass p-8 rounded-2xl border border-white/5 hover:border-white/20 transition-all duration-500 group relative overflow-hidden"
             >
-              <h3 className="text-5xl font-bold outfit mb-2 text-white">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <h3 className="text-5xl font-bold outfit mb-2 text-white group-hover:text-white transition-colors">
                 <Counter value={stat.value} />
               </h3>
-              <p className="text-sm font-medium uppercase tracking-widest text-zinc-400 mb-4">{stat.label}</p>
-              <p className="text-xs text-zinc-500 leading-relaxed">{stat.sub}</p>
+              <p className="text-sm font-medium uppercase tracking-widest text-zinc-400 group-hover:text-zinc-200 transition-colors mb-4">{stat.label}</p>
+              <div className="overflow-hidden h-0 group-hover:h-8 transition-all duration-500 ease-out">
+                <p className="text-xs text-zinc-500 leading-relaxed font-light">{stat.sub}</p>
+              </div>
             </motion.div>
           ))}
         </div>
