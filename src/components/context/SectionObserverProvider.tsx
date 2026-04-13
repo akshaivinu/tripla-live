@@ -1,7 +1,7 @@
-﻿'use client';
+﻿"use client";
 
-import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
-import { SECTION_IDS } from '@/constants/sections';
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { SECTION_IDS } from "@/constants/sections";
 
 const defaultSection = SECTION_IDS[0];
 
@@ -28,7 +28,7 @@ export function SectionObserverProvider({ children, enabled }: SectionObserverPr
           }
         });
       },
-      { threshold: 0.2, rootMargin: '-20% 0px -20% 0px' }
+      { threshold: 0.2, rootMargin: "-20% 0px -20% 0px" }
     );
 
     SECTION_IDS.forEach((id) => {

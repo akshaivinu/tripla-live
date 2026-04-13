@@ -21,8 +21,8 @@
   --input: 240 3.7% 15.9%;
   --ring: 240 4.9% 83.9%;
   --radius: 0.5rem;
-  --font-body: var(--font-inter, 'Inter', sans-serif);
-  --font-display: var(--font-outfit, 'Outfit', sans-serif);
+  --font-body: var(--font-inter, "Inter", sans-serif);
+  --font-display: var(--font-outfit, "Outfit", sans-serif);
 }
 
 * {
@@ -39,7 +39,11 @@ body {
   scroll-behavior: smooth;
 }
 
-h1, h2, h3, h4, .outfit {
+h1,
+h2,
+h3,
+h4,
+.outfit {
   font-family: var(--font-display);
   letter-spacing: -0.02em;
 }
@@ -78,6 +82,6 @@ section {
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

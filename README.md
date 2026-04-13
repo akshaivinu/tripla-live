@@ -14,6 +14,7 @@ Follow these steps to set up and run the project locally.
 ### Installation
 
 1. Clone the repository or download the source code:
+
    ```bash
    git clone <repository-url>
    cd tripla-live

@@ -1,40 +1,43 @@
-﻿'use client';
+﻿"use client";
 
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
 const cases = [
   {
-    title: 'Global Concert Series',
-    brand: 'Multi-Artist Tour',
-    audience: '50,000+ per event',
-    impact: 'Live streaming to 5M+',
-    video: 'https://videos.pexels.com/video-files/2795405/2795405-uhd_2560_1440_25fps.mp4',
-    poster: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=2000'
+    title: "Global Concert Series",
+    brand: "Multi-Artist Tour",
+    audience: "50,000+ per event",
+    impact: "Live streaming to 5M+",
+    video: "https://videos.pexels.com/video-files/2795405/2795405-uhd_2560_1440_25fps.mp4",
+    poster:
+      "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&q=80&w=2000",
   },
   {
-    title: 'Brand Activations',
-    brand: 'Red Bull | Nike',
-    audience: '250,000+ weekend reach',
-    impact: 'Viral social engagement',
-    video: 'https://videos.pexels.com/video-files/3843987/3843987-uhd_2560_1440_25fps.mp4',
-    poster: 'https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?auto=format&fit=crop&q=80&w=2000'
+    title: "Brand Activations",
+    brand: "Red Bull | Nike",
+    audience: "250,000+ weekend reach",
+    impact: "Viral social engagement",
+    video: "https://videos.pexels.com/video-files/3843987/3843987-uhd_2560_1440_25fps.mp4",
+    poster:
+      "https://images.unsplash.com/photo-1540317580384-e5d43616b9aa?auto=format&fit=crop&q=80&w=2000",
   },
   {
-    title: 'Luxury Fashion Shows',
-    brand: 'The Avenue Houses',
-    audience: 'Exclusive HNW Audience',
-    impact: 'Global PR coverage',
-    video: 'https://videos.pexels.com/video-files/3774478/3774478-uhd_2560_1440_24fps.mp4',
-    poster: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=2000'
-  }
+    title: "Luxury Fashion Shows",
+    brand: "The Avenue Houses",
+    audience: "Exclusive HNW Audience",
+    impact: "Global PR coverage",
+    video: "https://videos.pexels.com/video-files/3774478/3774478-uhd_2560_1440_24fps.mp4",
+    poster:
+      "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=2000",
+  },
 ];
 
-function VideoCard({ cs, i }: { cs: typeof cases[0]; i: number }) {
+function VideoCard({ cs, i }: { cs: (typeof cases)[0]; i: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const inView = useInView(ref, { margin: '-30% 0px -30% 0px', amount: 0.35 });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const inView = useInView(ref, { margin: "-30% 0px -30% 0px", amount: 0.35 });
   const [shouldRenderVideo, setShouldRenderVideo] = useState(false);
 
   useEffect(() => {
@@ -42,7 +45,7 @@ function VideoCard({ cs, i }: { cs: typeof cases[0]; i: number }) {
 
     let frameId: number | null = null;
 
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       frameId = window.requestAnimationFrame(() => setShouldRenderVideo(true));
     }
 
@@ -74,19 +77,16 @@ function VideoCard({ cs, i }: { cs: typeof cases[0]; i: number }) {
       ref={ref}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-100px' }}
+      viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-      className={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-8 md:gap-12 items-center`}
+      className={`flex flex-col ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-8 md:gap-12 items-center`}
     >
       <motion.div
         whileHover={{ scale: 1.02, rotateY: i % 2 === 0 ? 3 : -3 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
         className="w-full lg:w-3/5 aspect-video overflow-hidden rounded-3xl relative group shadow-[0_0_60px_rgba(255,255,255,0.05)] transform-gpu perspective-[1000px]"
       >
-        <motion.div
-          style={{ y }}
-          className="absolute inset-0"
-        >
+        <motion.div style={{ y }} className="absolute inset-0">
           {shouldRenderVideo ? (
             <motion.video
               ref={videoRef}
@@ -114,16 +114,24 @@ function VideoCard({ cs, i }: { cs: typeof cases[0]; i: number }) {
       </motion.div>
 
       <div className="w-full lg:w-2/5 flex flex-col items-start">
-        <span className="text-zinc-500 uppercase tracking-widest text-[10px] mb-4 font-bold">{cs.brand}</span>
-        <h3 className="text-3xl md:text-4xl font-bold outfit uppercase text-white mb-8 leading-tight">{cs.title}</h3>
+        <span className="text-zinc-500 uppercase tracking-widest text-[10px] mb-4 font-bold">
+          {cs.brand}
+        </span>
+        <h3 className="text-3xl md:text-4xl font-bold outfit uppercase text-white mb-8 leading-tight">
+          {cs.title}
+        </h3>
 
         <div className="grid grid-cols-2 gap-8 border-t border-white/10 pt-8 w-full">
           <div>
-            <span className="text-[10px] uppercase tracking-widest text-zinc-500 block mb-2">Audience</span>
+            <span className="text-[10px] uppercase tracking-widest text-zinc-500 block mb-2">
+              Audience
+            </span>
             <span className="text-sm text-white font-medium">{cs.audience}</span>
           </div>
           <div>
-            <span className="text-[10px] uppercase tracking-widest text-zinc-500 block mb-2">Impact</span>
+            <span className="text-[10px] uppercase tracking-widest text-zinc-500 block mb-2">
+              Impact
+            </span>
             <span className="text-sm text-white font-medium">{cs.impact}</span>
           </div>
         </div>
