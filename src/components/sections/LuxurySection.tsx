@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { motion, useScroll, useTransform, MotionValue, useSpring } from 'framer-motion';
 import { useRef, useState } from 'react';
@@ -11,7 +11,7 @@ const retailFormats = [
     id: 'luxury',
     title: 'The Avenue Luxury',
     desc: 'The ultimate collection of global fashion houses, where luxury finds its grandest expression in North America.',
-    brands: ['Hermès', 'Saks Fifth Avenue', 'Gucci', 'Saint Laurent', 'Dolce & Gabbana', 'Tiffany & Co.'],
+    brands: ['HermÃ¨s', 'Saks Fifth Avenue', 'Gucci', 'Saint Laurent', 'Dolce & Gabbana', 'Tiffany & Co.'],
     image: 'https://images.unsplash.com/photo-1540959733332-e94e270b4d48?auto=format&fit=crop&q=80&w=1400'
   },
   {
@@ -202,7 +202,7 @@ export default function LuxurySection() {
             <span className="text-gradient">Commerce</span>
           </h2>
           <p className="text-zinc-400 text-sm md:text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed font-light italic mt-4">
-            "Where the world's most iconic brands define the future of physical retail."
+            &ldquo;Where the world&rsquo;s most iconic brands define the future of physical retail.&rdquo;
           </p>
           <motion.div 
             animate={{ y: [0, 10, 0] }}
@@ -250,7 +250,7 @@ export default function LuxurySection() {
 
               <div className={`transition-all duration-1000 ${yourBrand ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                  <p className="text-lg md:text-xl text-zinc-400 font-light mb-12 max-w-2xl mx-auto leading-relaxed">
-                  Visualizing <span className="text-white font-bold tracking-widest">{yourBrand || 'DESTINY'}</span> positioned in the heart of the world's most productive retail corridor.
+                  Visualizing <span className="text-white font-bold tracking-widest">{yourBrand || 'DESTINY'}</span> positioned in the heart of the world&rsquo;s most productive retail corridor.
                 </p>
                 <button className="group relative px-8 py-4 sm:px-16 sm:py-6 md:px-20 md:py-8 bg-white text-black text-[10px] md:text-xs uppercase tracking-[0.5em] font-black rounded-full hover:scale-105 transition-all duration-500">
                   <span className="relative z-10">Request a simulation</span>
@@ -272,4 +272,6 @@ export default function LuxurySection() {
 
   );
 }
+
+
 

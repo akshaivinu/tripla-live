@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState } from 'react';
@@ -24,7 +24,7 @@ const attractions = [
   {
     id: 'big-snow',
     title: 'Big SNOW',
-    desc: 'North America’s only indoor real-snow ski resort.',
+    desc: 'North Americaâ€™s only indoor real-snow ski resort.',
     image: '/assets/big-snow.png',
     size: 'md',
     fallback: 'https://images.unsplash.com/photo-1551698618-1fed5d9e1ff2?auto=format&fit=crop&q=80&w=1000'
@@ -108,7 +108,7 @@ export default function EntertainmentSection() {
           <span className="text-zinc-500 uppercase tracking-widest text-xs mb-4 block outfit">Immersive Attractions</span>
           <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold outfit uppercase mb-6">World-Class Entertainment</h2>
           <p className="text-zinc-400 max-w-2xl mx-auto font-light">
-            Defining the 'Retailtainment' model. Over 50% of the property is dedicated to attractions that drive tens of millions of visits annually.
+            Defining the &lsquo;Retailtainment&rsquo; model. Over 50% of the property is dedicated to attractions that drive tens of millions of visits annually.
           </p>
         </motion.div>
 
@@ -121,3 +121,4 @@ export default function EntertainmentSection() {
     </section>
   );
 }
+

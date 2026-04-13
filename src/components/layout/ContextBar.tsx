@@ -1,9 +1,9 @@
-'use client';
+﻿'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useActiveSection } from '@/components/context/SectionObserverProvider';
 
-const contextMap: Record<string, { label: string, stat: string }> = {
+const contextMap: Record<string, { label: string; stat: string }> = {
   hero: { label: 'Introduction', stat: 'The Platform' },
   scale: { label: 'Metrics of Success', stat: '40M+ Annual Visitors' },
   luxury: { label: 'Retail Opportunities', stat: '450+ Brand Partners' },
@@ -14,29 +14,8 @@ const contextMap: Record<string, { label: string, stat: string }> = {
 };
 
 export default function ContextBar({ isVisible }: { isVisible: boolean }) {
-  const [currentSection, setCurrentSection] = useState('hero');
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setCurrentSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.2, rootMargin: '-20% 0px -20% 0px' }
-    );
-
-    Object.keys(contextMap).forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const current = contextMap[currentSection] || contextMap.hero;
+  const activeSection = useActiveSection();
+  const current = contextMap[activeSection] ?? contextMap.hero;
 
   return (
     <AnimatePresence>

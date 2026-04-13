@@ -1,31 +1,46 @@
-'use client';
+﻿'use client';
 
+import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
+const heroVideoPoster = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 2 1'%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23000000'/%3E%3Cstop offset='100%25' stop-color='%23333333'/%3E%3C/linearGradient%3E%3Crect width='2' height='1' fill='url(%23g)'/%3E%3C/svg%3E";
+const heroVideoSrc = '/assets/hero-video.mp4';
+
 export default function Hero({ onEnter, isStarted }: { onEnter: () => void; isStarted: boolean }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const shouldLoadVideo = isStarted;
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (isStarted) {
+      const playPromise = video.play();
+      if (playPromise?.catch) {
+        playPromise.catch(() => {});
+      }
+    } else {
+      video.pause();
+    }
+  }, [isStarted]);
+
   return (
     <section id="hero" className="relative h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden">
-      {/* Background Video (YouTube Embed) */}
+      {/* Background Video */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-black">
-        <div className="absolute inset-0 w-full h-full">
-          <iframe
-            className={`pointer-events-none transition-all duration-[2000ms] ${isStarted ? 'brightness-[0.4] saturate-[0.8]' : 'brightness-[0.6] saturate-100'}`}
-            src="https://www.youtube.com/embed/HXk63c-48I4?autoplay=1&mute=1&loop=1&playlist=HXk63c-48I4&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&playsinline=1&enablejsapi=1"
-            allow="autoplay; encrypted-media"
-            style={{ 
-              width: '100vw', 
-              height: '56.25vw', /* 16:9 Aspect Ratio */
-              minHeight: '101vh', /* Extra 1% to avoid rounding gaps */
-              minWidth: '180vh', 
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%) scale(1.15)',
-            }}
-          ></iframe>
-        </div>
-        {/* Overlay */}
+        <video
+          ref={videoRef}
+          className="absolute inset-0 min-h-full min-w-full object-cover"
+          src={shouldLoadVideo ? heroVideoSrc : undefined}
+          poster={heroVideoPoster}
+          muted
+          loop
+          playsInline
+          autoPlay={shouldLoadVideo}
+          preload={shouldLoadVideo ? 'auto' : 'metadata'}
+          aria-hidden="true"
+        />
         <div className={`absolute inset-0 bg-black/20 transition-all duration-[2000ms] ${isStarted ? 'backdrop-blur-[2px]' : 'backdrop-blur-0'}`} />
       </div>
 
@@ -44,7 +59,7 @@ export default function Hero({ onEnter, isStarted }: { onEnter: () => void; isSt
               transition={{ duration: 1, delay: 0.5 }}
               className="text-4xl md:text-7xl font-light outfit uppercase tracking-[0.2em] text-white mb-12"
             >
-              This isn't a mall.
+              This isn&rsquo;t a mall.
             </motion.h1>
             <motion.div
               initial={{ opacity: 0 }}
@@ -70,7 +85,7 @@ export default function Hero({ onEnter, isStarted }: { onEnter: () => void; isSt
               The Global Platform for Brands
             </span>
             <h1 className="text-5xl md:text-8xl font-bold mb-8 text-gradient outfit uppercase">
-              It's a <br /> Platform.
+              It&rsquo;s a <br /> Platform.
             </h1>
             <p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
               3 million square feet of world-class retail, 
@@ -104,7 +119,7 @@ export default function Hero({ onEnter, isStarted }: { onEnter: () => void; isSt
           className="absolute bottom-10 left-1/2 -translate-x-1/2 text-zinc-500"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1, y: [0, 10, 0] }}
-          transition={{ opacity: { duration: 1 }, y: { duration: 2, repeat: Infinity, ease: "easeInOut" } }}
+          transition={{ opacity: { duration: 1 }, y: { duration: 2, repeat: Infinity, ease: 'easeInOut' } }}
         >
           <ChevronDown size={32} strokeWidth={1} />
         </motion.div>
