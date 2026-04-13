@@ -75,7 +75,7 @@ function Card({
       }}
       className="absolute inset-0 flex items-center justify-center p-4 md:p-8 lg:p-12 pointer-events-none"
     >
-      <div className="relative w-full max-w-6xl aspect-video md:aspect-[16/7] rounded-2xl md:rounded-[2.5rem] overflow-hidden group pointer-events-auto shadow-2xl">
+      <div className="relative w-full max-w-6xl aspect-[4/5] md:aspect-[16/7] rounded-2xl md:rounded-[2.5rem] overflow-hidden group pointer-events-auto shadow-2xl">
         <MotionImage 
           src={format.image} 
           className="object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-1000"
@@ -168,7 +168,7 @@ export default function LuxurySection() {
   const finalY = useTransform(smoothProgress, [0.85, 0.95], [40, 0]);
 
   return (
-    <section ref={containerRef} id="luxury" className="relative bg-black z-10">
+    <section ref={containerRef} id="luxury" className="relative bg-black z-10 h-[100vh]">
       <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden perspective-1000">
         
         {/* Deep Field Background */}
