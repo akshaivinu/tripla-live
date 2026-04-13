@@ -26,7 +26,7 @@ const paths = [
 
 export default function CommercialSection() {
   return (
-    <section id="commercial" className="py-32 px-6 md:px-24 bg-zinc-900 relative">
+    <section id="commercial" className="py-16 md:py-32 px-6 md:px-24 bg-zinc-900 relative">
       <div className="max-w-7xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -36,12 +36,12 @@ export default function CommercialSection() {
           className="mb-20 text-center"
         >
           <span className="text-zinc-500 uppercase tracking-widest text-xs mb-4 block outfit">The Next Chapter</span>
-          <h2 className="text-4xl md:text-6xl font-bold outfit uppercase mb-6">Build Your Legacy <br/> <span className="text-zinc-500 italic">With Us</span></h2>
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold outfit uppercase mb-6">Build Your Legacy <br/> <span className="text-zinc-500 italic">With Us</span></h2>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {paths.map((path, i) => (
-            <motion.div
+              <motion.div
               key={path.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -52,14 +52,14 @@ export default function CommercialSection() {
                 scale: 1.02,
                 transition: { type: "spring", stiffness: 300, damping: 20 }
               }}
-              className="p-10 rounded-[2.5rem] glass border border-white/5 flex flex-col justify-between group hover:border-white/20 hover:shadow-[0_0_50px_rgba(255,255,255,0.1)] transition-all h-[500px] relative overflow-hidden bg-black/40"
+              className="p-6 md:p-10 rounded-[2.5rem] glass border border-white/5 flex flex-col justify-between group hover:border-white/20 hover:shadow-[0_0_50px_rgba(255,255,255,0.1)] transition-all min-h-[400px] md:h-[500px] relative overflow-hidden bg-black/40"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               
               <div>
-                <span className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 mb-6 block font-bold">Opportunity Type</span>
-                <h3 className="text-3xl font-bold outfit uppercase text-white mb-6 leading-tight">{path.title}</h3>
-                <p className="text-zinc-400 text-lg font-light leading-relaxed mb-8">{path.desc}</p>
+                <span className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 mb-4 md:mb-6 block font-bold">Opportunity Type</span>
+                <h3 className="text-2xl md:text-3xl font-bold outfit uppercase text-white mb-4 md:mb-6 leading-tight">{path.title}</h3>
+                <p className="text-zinc-400 text-sm md:text-lg font-light leading-relaxed mb-6 md:mb-8">{path.desc}</p>
                 
                 <div className="opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
                   <div className="h-[1px] w-12 bg-white/20 mb-4" />
@@ -84,7 +84,7 @@ export default function CommercialSection() {
           className="mt-20 text-center"
         >
           <p className="text-zinc-500 text-xs uppercase tracking-[0.5em] mb-4">Contact Our Commercial Team</p>
-          <p className="text-white text-xl md:text-2xl font-light outfit">leasing@americandream.com | +1 833 263 7326</p>
+          <p className="text-white text-base md:text-2xl font-light outfit break-all md:break-normal">leasing@americandream.com | +1 833 263 7326</p>
         </motion.div>
       </div>
       

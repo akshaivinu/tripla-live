@@ -2,6 +2,9 @@
 
 import { motion, useScroll, useTransform, MotionValue, useSpring } from 'framer-motion';
 import { useRef, useState } from 'react';
+import Image from 'next/image';
+
+const MotionImage = motion.create(Image);
 
 const retailFormats = [
   {
@@ -72,12 +75,14 @@ function Card({
       }}
       className="absolute inset-0 flex items-center justify-center p-4 md:p-8 lg:p-12 pointer-events-none"
     >
-      <div className="relative w-full max-w-6xl aspect-[16/10] md:aspect-[21/9] lg:h-[65vh] rounded-[2.5rem] overflow-hidden group pointer-events-auto shadow-2xl">
-        <motion.img 
+      <div className="relative w-full max-w-6xl aspect-video md:aspect-[16/7] rounded-2xl md:rounded-[2.5rem] overflow-hidden group pointer-events-auto shadow-2xl">
+        <MotionImage 
           src={format.image} 
-          className="absolute inset-0 w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-1000"
+          className="object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-1000"
           style={{ scale: 1.1 }}
           alt={format.title}
+          fill
+          sizes="(max-width: 1024px) 100vw, 80vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
         
@@ -97,11 +102,11 @@ function Card({
             <span className="text-[10px] uppercase tracking-[0.4em] text-white/50 font-bold">0{index + 1} / Collection</span>
           </div>
           
-          <h3 className="text-4xl md:text-5xl lg:text-7xl font-black outfit uppercase mb-6 tracking-tighter text-white leading-none">
+          <h3 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-black outfit uppercase mb-2 sm:mb-6 tracking-tighter text-white leading-none">
             {format.title}
           </h3>
           
-          <p className="text-zinc-300 font-light mb-8 max-w-xl text-lg md:text-xl leading-relaxed">
+          <p className="text-zinc-300 font-light mb-4 sm:mb-8 max-w-xl text-xs sm:text-sm md:text-xl leading-relaxed">
             {format.desc}
           </p>
           
@@ -122,6 +127,20 @@ function Card({
 }
 
 
+function NavDot({ index, progress }: { index: number; progress: MotionValue<number> }) {
+  const opacity = useTransform(
+    progress,
+    [index * 0.2, (index + 0.05) * 0.2, (index + 0.1) * 0.2, (index + 0.15) * 0.2, (index + 0.2) * 0.2],
+    [0.2, 0.4, 1, 0.4, 0.2]
+  );
+  return (
+    <motion.div
+      style={{ opacity, scale: opacity }}
+      className="w-1 h-3 rounded-full bg-white"
+    />
+  );
+}
+
 export default function LuxurySection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -129,9 +148,9 @@ export default function LuxurySection() {
     offset: ["start start", "end end"]
   });
 
-  // Smooth the scroll progress for more fluid animations
+  // Smooth the scroll progress for more fluid animations (lowered for slower feel)
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
+    stiffness: 80,
     damping: 30,
     restDelta: 0.001
   });
@@ -178,11 +197,11 @@ export default function LuxurySection() {
           className="relative z-20 text-center px-6"
         >
           <span className="text-zinc-500 uppercase tracking-[0.8em] text-[10px] mb-8 block outfit font-bold">The Avenue & Beyond</span>
-          <h2 className="text-6xl md:text-8xl lg:text-[10rem] font-black outfit uppercase mb-12 leading-[0.85] text-white tracking-tighter">
+          <h2 className="text-4xl md:text-8xl lg:text-[10rem] font-black outfit uppercase mb-8 md:mb-12 leading-[0.85] text-white tracking-tighter">
             Curated <br/>
             <span className="text-gradient">Commerce</span>
           </h2>
-          <p className="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-light italic">
+          <p className="text-zinc-400 text-sm md:text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed font-light italic mt-4">
             "Where the world's most iconic brands define the future of physical retail."
           </p>
           <motion.div 
@@ -207,7 +226,7 @@ export default function LuxurySection() {
           style={{ opacity: finalOpacity, scale: finalScale, y: finalY }}
           className="absolute inset-0 flex items-center justify-center p-6 md:p-12 z-30 pointer-events-none"
         >
-          <div className="w-full max-w-6xl glass rounded-[4rem] border border-white/10 p-10 md:p-20 overflow-hidden relative group pointer-events-auto">
+          <div className="w-full max-w-6xl glass rounded-[2rem] md:rounded-[4rem] border border-white/10 p-6 sm:p-10 md:p-20 overflow-hidden relative group pointer-events-auto">
             <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/5 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
             
             <div className="relative z-10 text-center">
@@ -219,7 +238,7 @@ export default function LuxurySection() {
                   value={yourBrand}
                   onChange={(e) => setYourBrand(e.target.value)}
                   placeholder="CHOOSE YOUR LEGACY"
-                  className="w-full bg-transparent border-b border-zinc-800 py-6 text-center text-3xl md:text-6xl lg:text-8xl font-black outfit uppercase tracking-tighter focus:border-white transition-all outline-none placeholder:text-zinc-900"
+                  className="w-full bg-transparent border-b border-zinc-800 py-3 md:py-6 text-center text-xl sm:text-3xl md:text-6xl lg:text-8xl font-black outfit uppercase tracking-tighter focus:border-white transition-all outline-none placeholder:text-zinc-900"
                 />
                 <motion.div 
                   animate={{ opacity: yourBrand ? 1 : 0.4 }}
@@ -233,7 +252,7 @@ export default function LuxurySection() {
                  <p className="text-lg md:text-xl text-zinc-400 font-light mb-12 max-w-2xl mx-auto leading-relaxed">
                   Visualizing <span className="text-white font-bold tracking-widest">{yourBrand || 'DESTINY'}</span> positioned in the heart of the world's most productive retail corridor.
                 </p>
-                <button className="group relative px-16 py-6 md:px-20 md:py-8 bg-white text-black text-[10px] md:text-xs uppercase tracking-[0.5em] font-black rounded-full hover:scale-105 transition-all duration-500">
+                <button className="group relative px-8 py-4 sm:px-16 sm:py-6 md:px-20 md:py-8 bg-white text-black text-[10px] md:text-xs uppercase tracking-[0.5em] font-black rounded-full hover:scale-105 transition-all duration-500">
                   <span className="relative z-10">Request a simulation</span>
                   <div className="absolute inset-0 bg-zinc-200 translate-y-full group-hover:translate-y-0 transition-transform duration-500 rounded-full" />
                 </button>
@@ -244,19 +263,9 @@ export default function LuxurySection() {
 
         {/* Progress Indicator */}
         <div className="absolute left-10 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-6 h-1/3 justify-center z-40">
-          {[0, 1, 2, 3, 4].map((i) => {
-            const isActive = useTransform(smoothProgress, 
-              [i * 0.2, (i + 0.05) * 0.2, (i + 0.1) * 0.2, (i + 0.15) * 0.2, (i + 0.2) * 0.2], 
-              [0.2, 0.4, 1, 0.4, 0.2]
-            );
-            return (
-              <motion.div 
-                key={i}
-                style={{ opacity: isActive, scale: isActive }}
-                className="w-1 h-3 rounded-full bg-white transition-all duration-500"
-              />
-            );
-          })}
+          {[0, 1, 2, 3, 4].map((i) => (
+            <NavDot key={i} index={i} progress={smoothProgress} />
+          ))}
         </div>
       </div>
     </section>

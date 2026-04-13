@@ -48,7 +48,7 @@ export default function ContextBar({ isVisible }: { isVisible: boolean }) {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-4xl"
         >
-          <div className="glass px-8 py-4 rounded-full border border-white/10 flex items-center justify-between backdrop-blur-xl">
+          <div className="glass px-4 py-3 md:px-8 md:py-4 rounded-full border border-white/10 flex items-center justify-between backdrop-blur-xl gap-4">
             <div className="flex items-center gap-6">
               <div className="flex flex-col">
                 <span className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 mb-1 font-medium">Viewing</span>

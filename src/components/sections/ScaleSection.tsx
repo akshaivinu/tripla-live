@@ -66,7 +66,7 @@ export default function ScaleSection() {
                 rotateX: -5,
                 transition: { duration: 0.3 }
               }}
-              className="glass p-8 rounded-2xl border border-white/5 hover:border-white/20 transition-all duration-500 group relative overflow-hidden transform-gpu"
+              className="glass p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/20 transition-all duration-500 group relative overflow-hidden transform-gpu"
               style={{ perspective: 1000 }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -86,7 +86,7 @@ export default function ScaleSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="mt-16 p-12 glass-dark rounded-3xl border border-white/5 relative overflow-hidden"
+          className="mt-16 p-6 md:p-12 glass-dark rounded-3xl border border-white/5 relative overflow-hidden"
         >
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="max-w-xl">

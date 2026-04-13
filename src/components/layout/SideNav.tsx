@@ -49,7 +49,7 @@ export default function SideNav({ isVisible }: { isVisible: boolean }) {
   };
 
   return (
-    <nav className={`fixed right-8 top-1/2 -translate-y-1/2 flex flex-col gap-6 items-end group transition-all duration-1000 z-[60] ${
+    <nav className={`fixed right-8 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-6 items-end group transition-all duration-1000 z-[60] ${
       isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10 pointer-events-none'
     }`}>
       {sections.map((section) => (

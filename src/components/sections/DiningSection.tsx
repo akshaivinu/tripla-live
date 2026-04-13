@@ -1,11 +1,14 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+
+const MotionImage = motion.create(Image);
 
 export default function DiningSection() {
   return (
-    <section id="dining" className="py-32 px-6 md:px-24 bg-black relative overflow-hidden">
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+    <section id="dining" className="py-16 md:py-32 px-6 md:px-24 bg-black relative overflow-hidden">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-20 items-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.95, rotateY: -10 }}
           whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
@@ -14,16 +17,15 @@ export default function DiningSection() {
           whileHover={{ scale: 1.02 }}
           className="relative order-2 lg:order-1 aspect-video lg:aspect-square rounded-[3rem] overflow-hidden shadow-2xl transform-gpu"
         >
-          <motion.img 
+          <MotionImage 
             initial={{ scale: 1.2 }}
             whileInView={{ scale: 1 }}
             transition={{ duration: 2 }}
             src="/assets/dining-lifestyle.png" 
-            alt="Dining at American Dream" 
-            className="w-full h-full object-cover opacity-80"
-            onError={(e) => {
-              e.currentTarget.src = 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1000';
-            }}
+            alt="Dining at American Dream"
+            fill
+            className="object-cover opacity-80"
+            sizes="(max-width: 1024px) 100vw, 50vw"
           />
           <div className="absolute inset-0 bg-gradient-to-tr from-black/90 via-black/20 to-transparent" />
           <div className="absolute bottom-12 left-12">
@@ -40,7 +42,7 @@ export default function DiningSection() {
           className="order-1 lg:order-2"
         >
           <span className="text-zinc-500 uppercase tracking-widest text-xs mb-4 block outfit">Culinary Excellence</span>
-          <h2 className="text-5xl md:text-7xl font-bold outfit uppercase mb-8 leading-tight text-white">
+          <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold outfit uppercase mb-6 md:mb-8 leading-tight text-white">
             Taste the <br/> <span className="text-gradient">Extraordinary</span>
           </h2>
           <p className="text-zinc-400 text-lg mb-10 max-w-lg leading-relaxed font-light">
