@@ -26,12 +26,20 @@ const retailFormats = [
     image: 'https://images.unsplash.com/photo-1534452285072-c5cee2f1557d?auto=format&fit=crop&q=80&w=1400'
   }
 ];
+interface Format {
+  id: string;
+  title: string;
+  desc: string;
+  brands: string[];
+  image: string;
+}
+
 function Card({ 
   format, 
   index, 
   progress 
 }: { 
-  format: any; 
+  format: Format; 
   index: number; 
   progress: MotionValue<number> 
 }) {
@@ -98,7 +106,7 @@ function Card({
           </p>
           
           <div className="flex flex-wrap gap-2 md:gap-3">
-            {format.brands.map(brand => (
+            {format.brands.map((brand: string) => (
               <span key={brand} className="text-[10px] md:text-xs uppercase tracking-widest px-5 py-2.5 bg-black/40 border border-white/10 rounded-full text-white/90 backdrop-blur-xl hover:bg-white hover:text-black transition-colors duration-300 cursor-default">
                 {brand}
               </span>
@@ -112,6 +120,7 @@ function Card({
     </motion.div>
   );
 }
+
 
 export default function LuxurySection() {
   const containerRef = useRef<HTMLDivElement>(null);
