@@ -26,7 +26,7 @@ export default function SideNav({ isVisible }: { isVisible: boolean }) {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.2, rootMargin: '-20% 0px -20% 0px' }
     );
 
     sections.forEach((section) => {

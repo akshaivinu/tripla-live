@@ -104,7 +104,7 @@ export default function EntertainmentSection() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-6 gap-6 h-[1000px]">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-6 min-h-[1000px] h-auto">
           {attractions.map((attr, i) => (
             <AttractionCard key={attr.id} attr={attr} i={i} />
           ))}

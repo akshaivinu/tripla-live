@@ -30,7 +30,7 @@ export default function EventsSection() {
   return (
     <section id="events" className="relative py-32 bg-black">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-24 sticky top-32 z-20">
+        <div className="mb-24 z-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

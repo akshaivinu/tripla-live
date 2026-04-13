@@ -39,14 +39,14 @@ function Counter({ value, duration = 2 }: { value: string; duration?: number }) 
 
 export default function ScaleSection() {
   return (
-    <section id="scale" className="min-h-screen py-32 px-6 md:px-24 bg-zinc-950 flex flex-col justify-center overflow-hidden">
+    <section id="scale" className="py-20 px-6 md:px-24 bg-zinc-950 overflow-hidden relative">
       <div className="max-w-7xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-20"
+          className="mb-12"
         >
           <span className="text-zinc-500 uppercase tracking-widest text-xs mb-4 block outfit">Metrics of Success</span>
           <h2 className="text-4xl md:text-6xl font-bold outfit uppercase mb-6">Unrivaled Scale. <br/> <span className="text-zinc-500">Unmatched Opportunity.</span></h2>
@@ -79,7 +79,7 @@ export default function ScaleSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, delay: 0.5 }}
-          className="mt-20 p-12 glass-dark rounded-3xl border border-white/5 relative overflow-hidden"
+          className="mt-16 p-12 glass-dark rounded-3xl border border-white/5 relative overflow-hidden"
         >
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
             <div className="max-w-xl">

@@ -25,7 +25,7 @@ export default function ContextBar({ isVisible }: { isVisible: boolean }) {
           }
         });
       },
-      { threshold: 0.5 }
+      { threshold: 0.2, rootMargin: '-20% 0px -20% 0px' }
     );
 
     Object.keys(contextMap).forEach((id) => {
