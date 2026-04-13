@@ -7,24 +7,28 @@ export default function DiningSection() {
     <section id="dining" className="py-32 px-6 md:px-24 bg-black relative overflow-hidden">
       <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, scale: 0.95, rotateY: -10 }}
+          whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1.2 }}
-          className="relative order-2 lg:order-1 aspect-video lg:aspect-square rounded-[3rem] overflow-hidden"
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          whileHover={{ scale: 1.02 }}
+          className="relative order-2 lg:order-1 aspect-video lg:aspect-square rounded-[3rem] overflow-hidden shadow-2xl transform-gpu"
         >
-          <img 
+          <motion.img 
+            initial={{ scale: 1.2 }}
+            whileInView={{ scale: 1 }}
+            transition={{ duration: 2 }}
             src="/assets/dining-lifestyle.png" 
             alt="Dining at American Dream" 
-            className="w-full h-full object-cover opacity-70"
+            className="w-full h-full object-cover opacity-80"
             onError={(e) => {
               e.currentTarget.src = 'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&q=80&w=1000';
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-black/90 via-black/20 to-transparent" />
           <div className="absolute bottom-12 left-12">
-            <h3 className="text-3xl font-bold outfit uppercase text-white">Carpaccio</h3>
-            <p className="text-zinc-400 text-sm uppercase tracking-widest mt-2">Fine Italian Dining</p>
+            <h3 className="text-3xl font-bold outfit uppercase text-white tracking-widest">Fine Dining Row</h3>
+            <p className="text-zinc-400 text-sm uppercase tracking-[0.3em] mt-3 font-light">Global Culinary Destination</p>
           </div>
         </motion.div>
 

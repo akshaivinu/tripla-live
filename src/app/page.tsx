@@ -1,15 +1,17 @@
 "use client"
 import { useState, useEffect } from 'react';
-import Hero from '@/components/Hero';
-import SideNav from '@/components/SideNav';
-import ContextBar from '@/components/ContextBar';
-import ScaleSection from '@/components/ScaleSection';
-import LuxurySection from '@/components/LuxurySection';
-import EntertainmentSection from '@/components/EntertainmentSection';
-import DiningSection from '@/components/DiningSection';
-import EventsSection from '@/components/EventsSection';
-import CommercialSection from '@/components/CommercialSection';
-import LeasingModal from '@/components/LeasingModal';
+import Hero from '@/components/sections/Hero';
+import SideNav from '@/components/layout/SideNav';
+import ContextBar from '@/components/layout/ContextBar';
+import ScaleSection from '@/components/sections/ScaleSection';
+import LuxurySection from '@/components/sections/LuxurySection';
+import EntertainmentSection from '@/components/sections/EntertainmentSection';
+import DiningSection from '@/components/sections/DiningSection';
+import EventsSection from '@/components/sections/EventsSection';
+import CommercialSection from '@/components/sections/CommercialSection';
+import LeasingModal from '@/components/ui/LeasingModal';
+
+import Cursor from '@/components/layout/Cursor';
 
 export default function Home() {
   const [isLeasingOpen, setIsLeasingOpen] = useState(false);
@@ -28,6 +30,7 @@ export default function Home() {
 
   return (
     <main className="relative flex flex-col w-full bg-black">
+      <Cursor />
       <SideNav isVisible={isStarted} />
       <ContextBar isVisible={isStarted} />
       <Hero onEnter={() => setIsStarted(true)} isStarted={isStarted} />

@@ -53,14 +53,18 @@ export default function EventsSection() {
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
               className={`flex flex-col ${i % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center`}
             >
-              <div className="w-full lg:w-3/5 aspect-video overflow-hidden rounded-3xl relative group">
+              <motion.div 
+                whileHover={{ scale: 1.02, rotateY: i % 2 === 0 ? 5 : -5 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="w-full lg:w-3/5 aspect-video overflow-hidden rounded-3xl relative group shadow-[0_0_40px_rgba(255,255,255,0.05)] transform-gpu perspective-[1000px]"
+              >
                 <img 
                   src={cs.image} 
                   alt={cs.title} 
                   className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 transition-all duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-              </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              </motion.div>
               
               <div className="w-full lg:w-2/5 flex flex-col items-start">
                 <span className="text-zinc-500 uppercase tracking-widest text-[10px] mb-4 font-bold">{cs.brand}</span>

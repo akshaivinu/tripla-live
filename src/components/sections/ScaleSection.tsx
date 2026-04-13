@@ -60,9 +60,16 @@ export default function ScaleSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: i * 0.1 }}
-              className="glass p-8 rounded-2xl border border-white/5 hover:border-white/20 transition-all duration-500 group relative overflow-hidden"
+              whileHover={{ 
+                y: -10,
+                rotateY: 5,
+                rotateX: -5,
+                transition: { duration: 0.3 }
+              }}
+              className="glass p-8 rounded-2xl border border-white/5 hover:border-white/20 transition-all duration-500 group relative overflow-hidden transform-gpu"
+              style={{ perspective: 1000 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <h3 className="text-5xl font-bold outfit mb-2 text-white group-hover:text-white transition-colors">
                 <Counter value={stat.value} />
               </h3>

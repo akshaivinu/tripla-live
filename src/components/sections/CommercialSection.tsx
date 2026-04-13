@@ -47,9 +47,14 @@ export default function CommercialSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: i * 0.1 }}
-              className="p-10 rounded-[2.5rem] glass border border-white/5 flex flex-col justify-between group hover:border-white/20 transition-all h-[500px] relative overflow-hidden"
+              whileHover={{ 
+                y: -15,
+                scale: 1.02,
+                transition: { type: "spring", stiffness: 300, damping: 20 }
+              }}
+              className="p-10 rounded-[2.5rem] glass border border-white/5 flex flex-col justify-between group hover:border-white/20 hover:shadow-[0_0_50px_rgba(255,255,255,0.1)] transition-all h-[500px] relative overflow-hidden bg-black/40"
             >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               
               <div>
                 <span className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 mb-6 block font-bold">Opportunity Type</span>
