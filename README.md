@@ -2,9 +2,9 @@
 
 An immersive, cinematic sales experience for American Dream Mall.
 
-## 🚀 Getting Started
+## ?? Getting Started
 
-Follow these steps to set up and run the project locally.
+These steps get the project running locally.
 
 ### Prerequisites
 
@@ -13,38 +13,27 @@ Follow these steps to set up and run the project locally.
 
 ### Installation
 
-1. Clone the repository or download the source code:
+1. Clone the repository:
 
-   ```bash
+   `ash
    git clone <repository-url>
    cd tripla-live
-   ```
+   `
 
 2. Install dependencies:
-   ```bash
+   `ash
    npm install
-   ```
+   `
 
-### Development
+## ?? Development Workflow
 
-Run the development server:
+Use the standard Next.js commands from the workspace root.
 
-```bash
-npm run dev
-```
+- **Start dev server** (watch mode, Turbopack):
+  `npm run dev`
+  Defaults to [http://localhost:3000](http://localhost:3000) unless otherwise specified in .env.
+- **Build for production**:
+  `npm run build`
+- **Preview production build**:
+  `npm run start`
 
-The application will be available at [http://localhost:3000](http://localhost:3000).
-
-### Build for Production
-
-To create a production build:
-
-```bash
-npm run build
-```
-
-To preview the production build:
-
-```bash
-npm start
-```

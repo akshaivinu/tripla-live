@@ -183,7 +183,11 @@ export default function LuxurySection() {
   const finalY = useTransform(smoothProgress, [0.85, 0.95], [40, 0]);
 
   return (
-    <section ref={containerRef} id="luxury" className="relative bg-black z-10 min-h-screen md:h-[100vh]">
+    <section
+      ref={containerRef}
+      id="luxury"
+      className="relative bg-black z-10 min-h-screen md:h-[100vh]"
+    >
       <div className="md:sticky top-0 h-full md:h-[100dvh] w-full flex items-center justify-center overflow-hidden perspective-1000">
         {/* Deep Field Background */}
         <div className="absolute inset-0 bg-[#050505]">

@@ -81,9 +81,7 @@ function VideoCard({ cs, i }: { cs: (typeof cases)[0]; i: number }) {
       transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
       className={`flex flex-col ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-8 md:gap-12 items-center`}
     >
-      <motion.div
-        className="w-full lg:w-3/5 aspect-video overflow-hidden rounded-3xl relative group shadow-[0_0_60px_rgba(255,255,255,0.05)] transform-gpu perspective-[1000px]"
-      >
+      <motion.div className="w-full lg:w-3/5 aspect-video overflow-hidden rounded-3xl relative group shadow-[0_0_60px_rgba(255,255,255,0.05)] transform-gpu perspective-[1000px]">
         <motion.div style={{ y }} className="absolute inset-0">
           {shouldRenderVideo ? (
             <motion.video

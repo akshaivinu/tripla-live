@@ -52,6 +52,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: "/assets/logo.png",
+    shortcut: "/assets/logo.png",
+    apple: "/assets/logo.png",
+  },
   other: {
     "geo.region": "US-NJ",
     "geo.placename": "East Rutherford",

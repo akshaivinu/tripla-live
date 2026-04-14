@@ -31,7 +31,10 @@ type Throttled<Args extends unknown[]> = ((...args: Args) => void) & {
   cancel: () => void;
 };
 
-const createThrottle = <Args extends unknown[]>(fn: (...args: Args) => void, wait: number): Throttled<Args> => {
+const createThrottle = <Args extends unknown[]>(
+  fn: (...args: Args) => void,
+  wait: number
+): Throttled<Args> => {
   let lastCall = 0;
   let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
@@ -77,6 +80,10 @@ export default function CommercialSection() {
   const [reduceMotion, setReduceMotion] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [visibleCards, setVisibleCards] = useState<Set<number>>(() => new Set(CARD_INDICES));
+  const [animationReady, setAnimationReady] = useState(false);
+  const shouldAnimateCards = !isMobile && !reduceMotion;
+  const needAnimation = shouldAnimateCards && animationReady;
+  const activeVisibleCards = needAnimation ? visibleCards : new Set(CARD_INDICES);
 
   useEffect(() => {
     if (typeof window === "undefined" || !window.matchMedia) return;
@@ -122,11 +129,20 @@ export default function CommercialSection() {
     };
   }, []);
 
-  const shouldAnimateCards = !isMobile && !reduceMotion;
-  const activeVisibleCards = shouldAnimateCards ? visibleCards : new Set(CARD_INDICES);
-
   useEffect(() => {
     if (!shouldAnimateCards) {
+      return;
+    }
+
+    const timer = window.setTimeout(() => setAnimationReady(true), 250);
+    return () => {
+      clearTimeout(timer);
+      setAnimationReady(false);
+    };
+  }, [shouldAnimateCards]);
+
+  useEffect(() => {
+    if (!needAnimation) {
       return;
     }
 
@@ -137,29 +153,26 @@ export default function CommercialSection() {
     cardRefs.current = CARD_INDICES.map((_, index) => cardRefs.current[index] ?? null);
 
     let observer: IntersectionObserver | null = null;
-    const handleIntersect = createThrottle(
-      (entries: IntersectionObserverEntry[]) => {
-        setVisibleCards((prev) => {
-          let changed = false;
-          const next = new Set(prev);
+    const handleIntersect = createThrottle((entries: IntersectionObserverEntry[]) => {
+      setVisibleCards((prev) => {
+        let changed = false;
+        const next = new Set(prev);
 
-          entries.forEach((entry) => {
-            const target = entry.target as HTMLDivElement;
-            const indexAttr = target.dataset.cardIndex;
-            const index = indexAttr ? Number(indexAttr) : -1;
+        entries.forEach((entry) => {
+          const target = entry.target as HTMLDivElement;
+          const indexAttr = target.dataset.cardIndex;
+          const index = indexAttr ? Number(indexAttr) : -1;
 
-            if (index >= 0 && entry.isIntersecting && !next.has(index)) {
-              next.add(index);
-              changed = true;
-              observer?.unobserve(target);
-            }
-          });
-
-          return changed ? next : prev;
+          if (index >= 0 && entry.isIntersecting && !next.has(index)) {
+            next.add(index);
+            changed = true;
+            observer?.unobserve(target);
+          }
         });
-      },
-      140
-    );
+
+        return changed ? next : prev;
+      });
+    }, 140);
 
     observer = new IntersectionObserver(handleIntersect, {
       threshold: 0.35,
@@ -174,7 +187,7 @@ export default function CommercialSection() {
       observer?.disconnect();
       handleIntersect.cancel();
     };
-  }, [shouldAnimateCards]);
+  }, [needAnimation]);
 
   return (
     <section id="commercial" className="py-16 md:py-32 px-6 md:px-24 bg-zinc-900 relative">
@@ -209,15 +222,16 @@ export default function CommercialSection() {
                   transition: { duration: 0.2 },
                 };
 
-            const hoverProps: Partial<HTMLMotionProps<"div">> = canHover && !isMobile
-              ? {
-                  whileHover: {
-                    y: -15,
-                    scale: 1.02,
-                    transition: { type: "spring", stiffness: 300, damping: 20 },
-                  },
-                }
-              : {};
+            const hoverProps: Partial<HTMLMotionProps<"div">> =
+              canHover && !isMobile
+                ? {
+                    whileHover: {
+                      y: -15,
+                      scale: 1.02,
+                      transition: { type: "spring", stiffness: 300, damping: 20 },
+                    },
+                  }
+                : {};
 
             return (
               <motion.div
