@@ -69,23 +69,17 @@ export default function ScaleSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: i * 0.1 }}
-              whileHover={{
-                y: -10,
-                rotateY: 5,
-                rotateX: -5,
-                transition: { duration: 0.3 },
-              }}
-              className="glass p-6 md:p-8 rounded-2xl border border-white/5 hover:border-white/20 transition-all duration-500 group relative overflow-hidden transform-gpu"
+              className="glass p-6 md:p-8 rounded-2xl border border-white/5 relative overflow-hidden transform-gpu"
               style={{ perspective: 1000 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <h3 className="text-5xl font-bold outfit mb-2 text-white group-hover:text-white transition-colors">
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 transition-opacity duration-500" />
+              <h3 className="text-5xl font-bold outfit mb-2 text-white transition-colors">
                 <Counter value={stat.value} />
               </h3>
-              <p className="text-sm font-medium uppercase tracking-widest text-zinc-400 group-hover:text-zinc-200 transition-colors mb-4">
+              <p className="text-sm font-medium uppercase tracking-widest text-zinc-400 transition-colors mb-4">
                 {stat.label}
               </p>
-              <div className="overflow-hidden h-0 group-hover:h-8 transition-all duration-500 ease-out">
+              <div className="overflow-hidden h-8 transition-all duration-500 ease-out">
                 <p className="text-xs text-zinc-500 leading-relaxed font-light">{stat.sub}</p>
               </div>
             </motion.div>

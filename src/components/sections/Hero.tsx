@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
@@ -46,7 +46,7 @@ export default function Hero({ onEnter, isStarted }: { onEnter: () => void; isSt
           aria-hidden="true"
         />
         <div
-          className={`absolute inset-0 bg-black/20 transition-all duration-[2000ms] ${isStarted ? "backdrop-blur-[2px]" : "backdrop-blur-0"}`}
+          className={`absolute inset-0 transition-all duration-[2000ms] ${isStarted ? "bg-black/60 md:bg-black/20 md:backdrop-blur-[2px]" : "bg-black/20"}`}
         />
       </div>
 

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion, useScroll, useTransform, MotionValue, useSpring } from "framer-motion";
 import { useRef, useState } from "react";
@@ -10,31 +10,28 @@ const retailFormats = [
     title: "The Avenue Luxury",
     desc: "The ultimate collection of global fashion houses, where luxury finds its grandest expression in North America.",
     brands: [
-      "HermÃ¨s",
+      "Hermès",
       "Saks Fifth Avenue",
       "Gucci",
       "Saint Laurent",
       "Dolce & Gabbana",
       "Tiffany & Co.",
     ],
-    image:
-      "https://images.unsplash.com/photo-1540959733332-e94e270b4d48?auto=format&fit=crop&q=80&w=1400",
+    image: "/assets/luxury-avenue.png",
   },
   {
     id: "flagship",
     title: "Global Flagships",
     desc: "Large-scale retail destinations for world-leading brands to showcase their full creative vision.",
     brands: ["Zara", "H&M", "Sephora", "Vans", "Lululemon", "Apple"],
-    image:
-      "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&q=80&w=1400",
+    image: "/assets/global-flagship.png",
   },
   {
     id: "popup",
     title: "Pop-Up & Innovation",
     desc: "Dynamic, flexible spaces for emerging brands, digital-first labels, and experimental retail activations.",
     brands: ["DTC Brands", "Art Installations", "Limited Drops", "Tech Showcases"],
-    image:
-      "https://images.unsplash.com/photo-1534452285072-c5cee2f1557d?auto=format&fit=crop&q=80&w=1400",
+    image: "/assets/innovation-popup.png",
   },
 ];
 interface Format {
@@ -63,9 +60,10 @@ function Card({
 
   // Enter phase: 0.1 before start
   const opacity = useTransform(progress, [start - 0.1, start, end - 0.05, end], [0, 1, 1, 0]);
-  const scale = useTransform(progress, [start - 0.1, start, end], [0.85, 1, 1.05]);
-  const z = useTransform(progress, [start - 0.1, start, end], [-150, 0, 150]);
-  const rotateX = useTransform(progress, [start - 0.1, start, end], [15, 0, -10]);
+  const scale = useTransform(progress, [start - 0.1, start, end], [0.85, 1, 1]);
+  // Use much smaller Z and rotation for mobile to prevent jitter
+  const z = useTransform(progress, [start - 0.1, start, end], [-50, 0, 50]);
+  const rotateX = useTransform(progress, [start - 0.1, start, end], [5, 0, -5]);
 
   // Content animations
   const contentY = useTransform(progress, [start, end], [20, -20]);
@@ -77,20 +75,21 @@ function Card({
         scale,
         z,
         rotateX,
-        perspective: 1200,
-        transformStyle: "preserve-3d",
         zIndex: 30 - index,
       }}
-      className="absolute inset-0 flex items-center justify-center p-4 md:p-8 lg:p-12 pointer-events-none"
+      className="absolute inset-0 flex items-center justify-center p-4 md:p-8 lg:p-12 pointer-events-none will-change-transform md:[perspective:1200px] md:[transform-style:preserve-3d]"
     >
       <div className="relative w-full max-w-6xl aspect-[4/5] md:aspect-[16/7] rounded-2xl md:rounded-[2.5rem] overflow-hidden group pointer-events-auto shadow-2xl">
         <Image
           src={format.image}
-          className="object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-1000"
+          className="object-cover transition-all duration-1000"
           style={{ transform: "scale(1.1)" }}
           alt={format.title}
+          loading={index === 0 ? "eager" : "lazy"}
+          priority={index === 0}
           fill
           sizes="(max-width: 1024px) 100vw, 80vw"
+          quality={50}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
@@ -132,8 +131,8 @@ function Card({
           </div>
         </motion.div>
 
-        {/* Interactive Border */}
-        <div className="absolute inset-0 border border-white/10 rounded-[2.5rem] pointer-events-none group-hover:border-white/30 transition-colors duration-700" />
+        {/* Static Border */}
+        <div className="absolute inset-0 border border-white/10 rounded-[2.5rem] pointer-events-none group-border-white/30 transition-colors duration-700" />
       </div>
     </motion.div>
   );
@@ -165,9 +164,9 @@ export default function LuxurySection() {
 
   // Smooth the scroll progress for more fluid animations (lowered for slower feel)
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 80,
-    damping: 30,
-    restDelta: 0.001,
+    stiffness: 100,
+    damping: 40,
+    restDelta: 0.01,
   });
 
   const [yourBrand, setYourBrand] = useState("");
@@ -184,8 +183,8 @@ export default function LuxurySection() {
   const finalY = useTransform(smoothProgress, [0.85, 0.95], [40, 0]);
 
   return (
-    <section ref={containerRef} id="luxury" className="relative bg-black z-10 h-[100vh]">
-      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden perspective-1000">
+    <section ref={containerRef} id="luxury" className="relative bg-black z-10 min-h-screen md:h-[100vh]">
+      <div className="md:sticky top-0 h-full md:h-[100dvh] w-full flex items-center justify-center overflow-hidden perspective-1000">
         {/* Deep Field Background */}
         <div className="absolute inset-0 bg-[#050505]">
           <div
@@ -249,7 +248,7 @@ export default function LuxurySection() {
           className="absolute inset-0 flex items-center justify-center p-6 md:p-12 z-30 pointer-events-none"
         >
           <div className="w-full max-w-6xl glass rounded-[2rem] md:rounded-[4rem] border border-white/10 p-6 sm:p-10 md:p-20 overflow-hidden relative group pointer-events-auto">
-            <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/5 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+            <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/5 pointer-events-none opacity-0 transition-opacity duration-1000" />
 
             <div className="relative z-10 text-center">
               <span className="text-zinc-500 uppercase tracking-[0.4em] text-[10px] mb-12 block outfit font-bold">

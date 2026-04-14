@@ -39,6 +39,7 @@ export default function LeasingModal({
                   </p>
                 </div>
                 <button
+                  title="close"
                   onClick={onClose}
                   className="p-2 hover:bg-white/5 rounded-full transition-colors text-zinc-500 hover:text-white"
                 >
@@ -85,7 +86,10 @@ export default function LeasingModal({
                   <label className="text-[10px] uppercase tracking-widest text-zinc-500 font-bold ml-4">
                     Interest Area
                   </label>
-                  <select className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-white/20 transition-all font-light appearance-none">
+                  <select
+                    title="select"
+                    className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-white/20 transition-all font-light appearance-none"
+                  >
                     <option className="bg-zinc-900">The Avenue Luxury</option>
                     <option className="bg-zinc-900">Retail Flagship</option>
                     <option className="bg-zinc-900">Pop-up / Activation</option>

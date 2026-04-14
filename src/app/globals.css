@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 :root {
   --background: 240 10% 3.9%;
@@ -36,7 +36,7 @@ body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: var(--font-body);
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; -- Removed to prevent conflicts with JS scroll animations */
 }
 
 h1,

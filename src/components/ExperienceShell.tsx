@@ -1,18 +1,39 @@
-﻿"use client";
+"use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Hero from "@/components/sections/Hero";
 import SideNav from "@/components/layout/SideNav";
 import ContextBar from "@/components/layout/ContextBar";
-import ScaleSection from "@/components/sections/ScaleSection";
-import LuxurySection from "@/components/sections/LuxurySection";
-import EntertainmentSection from "@/components/sections/EntertainmentSection";
-import DiningSection from "@/components/sections/DiningSection";
-import EventsSection from "@/components/sections/EventsSection";
-import CommercialSection from "@/components/sections/CommercialSection";
 import LeasingModal from "@/components/ui/LeasingModal";
 import Cursor from "@/components/layout/Cursor";
+import SectionSkeleton from "@/components/ui/SectionSkeleton";
 import { SectionObserverProvider } from "@/components/context/SectionObserverProvider";
+
+const ScaleSection = dynamic(() => import("@/components/sections/ScaleSection"), {
+  ssr: false,
+  loading: () => <SectionSkeleton label="Scale metrics" rows={4} />,
+});
+const LuxurySection = dynamic(() => import("@/components/sections/LuxurySection"), {
+  ssr: false,
+  loading: () => <SectionSkeleton label="Luxury experiences" rows={5} />,
+});
+const DiningSection = dynamic(() => import("@/components/sections/DiningSection"), {
+  ssr: false,
+  loading: () => <SectionSkeleton label="Dining concepts" rows={3} />,
+});
+const EntertainmentSection = dynamic(() => import("@/components/sections/EntertainmentSection"), {
+  ssr: false,
+  loading: () => <SectionSkeleton label="Entertainment highlights" rows={4} />,
+});
+const EventsSection = dynamic(() => import("@/components/sections/EventsSection"), {
+  ssr: false,
+  loading: () => <SectionSkeleton label="Event case studies" rows={5} />,
+});
+const CommercialSection = dynamic(() => import("@/components/sections/CommercialSection"), {
+  ssr: false,
+  loading: () => <SectionSkeleton label="Commercial opportunities" rows={3} />,
+});
 
 export default function ExperienceShell() {
   const [isLeasingOpen, setIsLeasingOpen] = useState(false);
@@ -38,7 +59,9 @@ export default function ExperienceShell() {
         <Hero onEnter={() => setIsStarted(true)} isStarted={isStarted} />
 
         <div
-          className={`transition-opacity duration-[1500ms] ${isStarted ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+          className={`transition-opacity duration-[1500ms] ${
+            isStarted ? "opacity-100 placeholder:opacity-0" : "opacity-0 pointer-events-none"
+          }`}
         >
           <ScaleSection />
           <LuxurySection />

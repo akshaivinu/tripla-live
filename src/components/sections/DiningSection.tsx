@@ -14,8 +14,7 @@ export default function DiningSection() {
           whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 1.5, ease: "easeOut" }}
-          whileHover={{ scale: 1.02 }}
-          className="relative order-2 lg:order-1 aspect-video lg:aspect-square rounded-[3rem] overflow-hidden shadow-2xl transform-gpu"
+          className="relative order-2 lg:order-1 aspect-video lg:aspect-square rounded-[3rem] overflow-hidden shadow-2xl transform-gpu will-change-transform"
         >
           <MotionImage
             initial={{ scale: 1.2 }}
@@ -26,6 +25,7 @@ export default function DiningSection() {
             fill
             className="object-cover opacity-80"
             sizes="(max-width: 1024px) 100vw, 50vw"
+            quality={50}
           />
           <div className="absolute inset-0 bg-gradient-to-tr from-black/90 via-black/20 to-transparent" />
           <div className="absolute bottom-12 left-12">

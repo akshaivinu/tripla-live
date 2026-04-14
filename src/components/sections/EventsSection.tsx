@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
@@ -82,8 +82,6 @@ function VideoCard({ cs, i }: { cs: (typeof cases)[0]; i: number }) {
       className={`flex flex-col ${i % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-8 md:gap-12 items-center`}
     >
       <motion.div
-        whileHover={{ scale: 1.02, rotateY: i % 2 === 0 ? 3 : -3 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
         className="w-full lg:w-3/5 aspect-video overflow-hidden rounded-3xl relative group shadow-[0_0_60px_rgba(255,255,255,0.05)] transform-gpu perspective-[1000px]"
       >
         <motion.div style={{ y }} className="absolute inset-0">
@@ -153,7 +151,7 @@ export default function EventsSection() {
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-[0.04] pointer-events-none"
+        className="hidden md:block absolute inset-0 w-full h-full object-cover opacity-[0.04] pointer-events-none"
         src="https://videos.pexels.com/video-files/2795405/2795405-uhd_2560_1440_25fps.mp4"
         preload="metadata"
       />

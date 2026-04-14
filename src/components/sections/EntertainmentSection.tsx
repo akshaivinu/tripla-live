@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
@@ -71,7 +71,7 @@ function AttractionCard({ attr, i }: { attr: (typeof attractions)[0]; i: number 
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.8, delay: i * 0.1 }}
-      className={`relative overflow-hidden rounded-3xl group ${
+      className={`relative overflow-hidden rounded-3xl group will-change-transform ${
         attr.size === "lg"
           ? "aspect-[4/3] md:aspect-auto md:col-span-4 md:row-span-2"
           : attr.size === "md"
@@ -83,9 +83,10 @@ function AttractionCard({ attr, i }: { attr: (typeof attractions)[0]; i: number 
         src={imgSrc}
         alt={attr.title}
         fill
-        className="object-cover transition-transform duration-700 group-hover:scale-110"
+        className="object-cover transition-transform duration-700"
         onError={() => setImgSrc(attr.fallback)}
         sizes="(max-width: 768px) 100vw, 50vw"
+        quality={50}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-80" />
 
