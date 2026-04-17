@@ -1,16 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { memo } from "react";
+import dynamic from "next/dynamic";
 import { AnimatePresence, motion } from "framer-motion";
 import { useDeck } from "@/components/context/DeckContext";
-import Hero from "@/components/sections/Hero";
-import ScaleSection from "@/components/sections/ScaleSection";
-import LuxurySection from "@/components/sections/LuxurySection";
-import DiningSection from "@/components/sections/DiningSection";
-import EntertainmentSection from "@/components/sections/EntertainmentSection";
-import EventsSection from "@/components/sections/EventsSection";
-import CommercialSection from "@/components/sections/CommercialSection";
-import ContactSection from "@/components/sections/ContactSection";
+
+const SectionSkeleton = () => (
+  <div className="w-full h-full bg-zinc-950 flex items-center justify-center">
+    <div className="w-8 h-8 border border-white/20 border-t-[var(--gold)] rounded-full animate-spin" />
+  </div>
+);
+
+const Hero = dynamic(() => import("@/components/sections/Hero"), { loading: () => <SectionSkeleton />, ssr: false });
+const ScaleSection = dynamic(() => import("@/components/sections/ScaleSection"), { loading: () => <SectionSkeleton />, ssr: false });
+const LuxurySection = dynamic(() => import("@/components/sections/LuxurySection"), { loading: () => <SectionSkeleton />, ssr: false });
+const DiningSection = dynamic(() => import("@/components/sections/DiningSection"), { loading: () => <SectionSkeleton />, ssr: false });
+const EntertainmentSection = dynamic(() => import("@/components/sections/EntertainmentSection"), { loading: () => <SectionSkeleton />, ssr: false });
+const EventsSection = dynamic(() => import("@/components/sections/EventsSection"), { loading: () => <SectionSkeleton />, ssr: false });
+const CommercialSection = dynamic(() => import("@/components/sections/CommercialSection"), { loading: () => <SectionSkeleton />, ssr: false });
+const ContactSection = dynamic(() => import("@/components/sections/ContactSection"), { loading: () => <SectionSkeleton />, ssr: false });
 
 const SLIDE_COMPONENTS: Record<string, React.FC> = {
   hero: Hero,
@@ -52,9 +60,10 @@ export default function DeckExperience() {
           animate="animate"
           exit="exit"
           transition={{
-            y: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.6 },
+            y: { type: "spring", stiffness: 260, damping: 28 },
+            opacity: { duration: 0.5 },
           }}
+          style={{ willChange: "transform, opacity" }}
           className="absolute inset-0 w-full h-full"
         >
           {React.createElement(SLIDE_COMPONENTS[activeId] || (() => null))}

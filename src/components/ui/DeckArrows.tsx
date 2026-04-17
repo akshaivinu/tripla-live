@@ -1,10 +1,11 @@
 "use client";
 
+import { memo } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useDeck } from "@/components/context/DeckContext";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function DeckArrows() {
+const DeckArrows = memo(function DeckArrows() {
   const { activeIndex, totalSlides, next, prev } = useDeck();
 
   return (
@@ -52,4 +53,6 @@ export default function DeckArrows() {
       </div>
     </div>
   );
-}
+});
+
+export default DeckArrows;

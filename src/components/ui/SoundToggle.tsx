@@ -1,10 +1,11 @@
 "use client";
 
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { useDeck } from "@/components/context/DeckContext";
 import { Volume2, VolumeX } from "lucide-react";
 
-export default function SoundToggle() {
+const SoundToggle = memo(function SoundToggle() {
   const { isMuted, toggleMute } = useDeck();
 
   return (
@@ -26,4 +27,6 @@ export default function SoundToggle() {
       </span>
     </button>
   );
-}
+});
+
+export default SoundToggle;

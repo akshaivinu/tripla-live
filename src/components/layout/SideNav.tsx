@@ -1,12 +1,15 @@
+"use client";
+
+import { memo } from "react";
 import { SECTION_IDS, SECTION_NAV_ITEMS } from "@/constants/sections";
 import { useDeck } from "@/components/context/DeckContext";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
-export default function SideNav() {
+const SideNav = memo(function SideNav() {
   const { activeIndex, goToSlide } = useDeck();
 
   return (
-    <nav className="fixed left-8 top-1/2 -translate-y-1/2 z-[100] flex flex-col items-center gap-6">
+    <nav className="fixed left-8 top-1/2 -translate-y-1/2 z-[100] hidden lg:flex flex-col items-center gap-6">
       {/* Vertical Track */}
       <div className="absolute top-0 bottom-0 w-[1px] bg-white/10 left-1/2 -translate-x-1/2" />
       <motion.div 
@@ -53,4 +56,6 @@ export default function SideNav() {
       ))}
     </nav>
   );
-}
+});
+
+export default SideNav;

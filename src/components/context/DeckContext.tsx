@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from "react";
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { SECTION_IDS, SectionId } from "@/constants/sections";
 
 interface DeckContextType {
@@ -82,47 +82,6 @@ export function DeckProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
-    const handleWheel = (e: WheelEvent) => {
-      const now = Date.now();
-      if (now - lastScrollTime.current < 1000) return;
-
-      if (Math.abs(e.deltaY) > 50) {
-        if (e.deltaY > 0) {
-          next();
-        } else {
-          prev();
-        }
-        lastScrollTime.current = now;
-      }
-    };
-
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStart.current = {
-        x: e.touches[0].clientX,
-        y: e.touches[0].clientY,
-      };
-    };
-
-    const handleTouchEnd = (e: TouchEvent) => {
-      if (!touchStart.current) return;
-
-      const deltaX = e.changedTouches[0].clientX - touchStart.current.x;
-      const deltaY = e.changedTouches[0].clientY - touchStart.current.y;
-
-      // Threshold to distinguish between accidental touch and intentional swipe
-      if (Math.abs(deltaY) > 50 || Math.abs(deltaX) > 50) {
-        if (Math.abs(deltaY) > Math.abs(deltaX)) {
-          // Vertical swipe
-          if (deltaY < 0) next();
-          else prev();
-        } else {
-          // Horizontal swipe
-          if (deltaX < 0) next();
-          else prev();
-        }
-      }
-      touchStart.current = null;
-    };
 
     window.addEventListener("keydown", handleKeyDown);
 
@@ -133,26 +92,29 @@ export function DeckProvider({ children }: { children: React.ReactNode }) {
 
   const activeId = SECTION_IDS[activeIndex];
 
+  const contextValue = useMemo(
+    () => ({
+      activeIndex,
+      activeId,
+      totalSlides: SECTION_IDS.length,
+      isMuted,
+      isTOCOpen,
+      hasStarted,
+      introComplete,
+      direction,
+      toggleMute,
+      setTOCOpen,
+      setHasStarted,
+      setIntroComplete,
+      goToSlide,
+      next,
+      prev,
+    }),
+    [activeIndex, activeId, isMuted, isTOCOpen, hasStarted, introComplete, direction, toggleMute, setTOCOpen, setHasStarted, setIntroComplete, goToSlide, next, prev]
+  );
+
   return (
-    <DeckContext.Provider
-      value={{
-        activeIndex,
-        activeId,
-        totalSlides: SECTION_IDS.length,
-        isMuted,
-        isTOCOpen,
-        hasStarted,
-        introComplete,
-        direction,
-        toggleMute,
-        setTOCOpen,
-        setHasStarted,
-        setIntroComplete,
-        goToSlide,
-        next,
-        prev,
-      }}
-    >
+    <DeckContext.Provider value={contextValue}>
       {children}
     </DeckContext.Provider>
   );

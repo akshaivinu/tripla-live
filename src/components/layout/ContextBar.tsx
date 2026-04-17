@@ -1,6 +1,8 @@
+"use client";
+
+import { memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDeck } from "@/components/context/DeckContext";
-import { SECTION_IDS } from "@/constants/sections";
 
 const contextMap: Record<string, { label: string; stat: string }> = {
   hero: { label: "Introduction", stat: "Mall of America" },
@@ -13,11 +15,12 @@ const contextMap: Record<string, { label: string; stat: string }> = {
   contact: { label: "Leasing Inquiry", stat: "Next Chapter" },
 };
 
-export default function ContextBar() {
+const ContextBar = memo(function ContextBar() {
   const { activeId } = useDeck();
   const current = contextMap[activeId] || contextMap.hero;
 
   return (
+    <div className="hidden md:block">
     <AnimatePresence mode="wait">
       <motion.div
         key={activeId}
@@ -46,5 +49,8 @@ export default function ContextBar() {
         </div>
       </motion.div>
     </AnimatePresence>
+    </div>
   );
-}
+});
+
+export default ContextBar;

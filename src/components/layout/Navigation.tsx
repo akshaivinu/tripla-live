@@ -1,7 +1,10 @@
+"use client";
+
+import { memo } from "react";
 import { SECTION_NAV_ITEMS } from "@/constants/sections";
 import { useDeck } from "@/components/context/DeckContext";
 
-export default function Navigation() {
+const Navigation = memo(function Navigation() {
   const { activeId, goToSlide } = useDeck();
 
   return (
@@ -23,4 +26,6 @@ export default function Navigation() {
       </div>
     </nav>
   );
-}
+});
+
+export default Navigation;

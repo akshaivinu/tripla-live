@@ -119,3 +119,30 @@ section {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+/* =====================
+   RESPONSIVE SAFETY NET
+   ===================== */
+
+/* Fluid base font so rem-based spacing auto-scales on small screens */
+@media (max-width: 640px) {
+  html { font-size: 14px; }
+}
+
+/* Prevent content from hiding behind iPhone notch / Android navbar */
+main {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Ensure touch targets aren't accidentally blocked */
+button, a {
+  touch-action: manipulation;
+}
+
+/* On small screens, the deck arrows should be smaller and inset less */
+@media (max-width: 640px) {
+  .deck-arrow {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}

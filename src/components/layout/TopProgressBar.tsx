@@ -1,9 +1,10 @@
 "use client";
 
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { useDeck } from "@/components/context/DeckContext";
 
-export default function TopProgressBar() {
+const TopProgressBar = memo(function TopProgressBar() {
   const { activeIndex, totalSlides } = useDeck();
   const progress = ((activeIndex + 1) / totalSlides) * 100;
 
@@ -23,4 +24,6 @@ export default function TopProgressBar() {
       </motion.div>
     </div>
   );
-}
+});
+
+export default TopProgressBar;
