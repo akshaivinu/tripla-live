@@ -1,313 +1,89 @@
 "use client";
 
-import { motion, type HTMLMotionProps } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { useDeck } from "@/components/context/DeckContext";
 
-const paths = [
-  {
-    title: "Retail Leasing",
-    desc: "Secure your place among global flagships and luxury icons.",
-    cta: "Inquire Now",
-    color: "from-white/10 to-white/5",
-  },
-  {
-    title: "Partnerships",
-    desc: "Connect with a massive, high-intent audience year-round.",
-    cta: "Partner With Us",
-    color: "from-zinc-800/10 to-zinc-900/5",
-  },
-  {
-    title: "Event Hosting",
-    desc: "Book one of our world-class venues for your next activation.",
-    cta: "Book Venue",
-    color: "from-white/10 to-white/5",
-  },
+const brands = [
+  "Nike",
+  "Apple",
+  "Zara",
+  "Nordstrom",
+  "H&M",
+  "Lego",
+  "Sephora",
+  "Microsoft",
+  "Levi's",
+  "Coach",
+  "Uniqlo",
+  "+ 509 more",
 ];
 
-const CARD_INDICES = paths.map((_, index) => index);
-
-type Throttled<Args extends unknown[]> = ((...args: Args) => void) & {
-  cancel: () => void;
-};
-
-const createThrottle = <Args extends unknown[]>(
-  fn: (...args: Args) => void,
-  wait: number
-): Throttled<Args> => {
-  let lastCall = 0;
-  let timeoutId: ReturnType<typeof setTimeout> | null = null;
-
-  const invoke = (...args: Args) => fn(...args);
-
-  const throttled = ((...args: Args) => {
-    const now = Date.now();
-    const remaining = wait - (now - lastCall);
-
-    if (remaining <= 0 || remaining > wait) {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-        timeoutId = null;
-      }
-      lastCall = now;
-      invoke(...args);
-    } else if (!timeoutId) {
-      timeoutId = setTimeout(() => {
-        lastCall = Date.now();
-        timeoutId = null;
-        invoke(...args);
-      }, remaining);
-    }
-  }) as Throttled<Args>;
-
-  throttled.cancel = () => {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-      timeoutId = null;
-    }
-  };
-
-  return throttled;
-};
-
 export default function CommercialSection() {
-  const [canHover, setCanHover] = useState(
-    () =>
-      typeof window !== "undefined" &&
-      window.matchMedia("(hover: hover) and (pointer: fine)").matches
-  );
-
-  const [reduceMotion, setReduceMotion] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [visibleCards, setVisibleCards] = useState<Set<number>>(() => new Set(CARD_INDICES));
-  const [animationReady, setAnimationReady] = useState(false);
-  const shouldAnimateCards = !isMobile && !reduceMotion;
-  const needAnimation = shouldAnimateCards && animationReady;
-  const activeVisibleCards = needAnimation ? visibleCards : new Set(CARD_INDICES);
-
-  useEffect(() => {
-    if (typeof window === "undefined" || !window.matchMedia) return;
-    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
-    const handler = (event: MediaQueryListEvent) => setCanHover(event.matches);
-
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener("change", handler);
-      return () => mediaQuery.removeEventListener("change", handler);
-    }
-
-    mediaQuery.addListener(handler);
-    return () => mediaQuery.removeListener(handler);
-  }, []);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    if (typeof window === "undefined" || !window.matchMedia) return;
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const handler = () => setReduceMotion(mediaQuery.matches);
-
-    if (mediaQuery.addEventListener) {
-      handler();
-      mediaQuery.addEventListener("change", handler);
-      return () => mediaQuery.removeEventListener("change", handler);
-    }
-
-    mediaQuery.addListener(handler);
-    handler();
-    return () => mediaQuery.removeListener(handler);
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const resizeHandler = createThrottle(() => {
-      setIsMobile(window.innerWidth < 1024);
-    }, 200);
-    resizeHandler();
-    window.addEventListener("resize", resizeHandler);
-    return () => {
-      window.removeEventListener("resize", resizeHandler);
-      resizeHandler.cancel();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!shouldAnimateCards) {
-      return;
-    }
-
-    const timer = window.setTimeout(() => setAnimationReady(true), 250);
-    return () => {
-      clearTimeout(timer);
-      setAnimationReady(false);
-    };
-  }, [shouldAnimateCards]);
-
-  useEffect(() => {
-    if (!needAnimation) {
-      return;
-    }
-
-    const frameId = requestAnimationFrame(() => {
-      setVisibleCards(new Set());
-    });
-
-    cardRefs.current = CARD_INDICES.map((_, index) => cardRefs.current[index] ?? null);
-
-    let observer: IntersectionObserver | null = null;
-    const handleIntersect = createThrottle((entries: IntersectionObserverEntry[]) => {
-      setVisibleCards((prev) => {
-        let changed = false;
-        const next = new Set(prev);
-
-        entries.forEach((entry) => {
-          const target = entry.target as HTMLDivElement;
-          const indexAttr = target.dataset.cardIndex;
-          const index = indexAttr ? Number(indexAttr) : -1;
-
-          if (index >= 0 && entry.isIntersecting && !next.has(index)) {
-            next.add(index);
-            changed = true;
-            observer?.unobserve(target);
-          }
-        });
-
-        return changed ? next : prev;
-      });
-    }, 140);
-
-    observer = new IntersectionObserver(handleIntersect, {
-      threshold: 0.35,
-    });
-
-    cardRefs.current.forEach((card) => {
-      if (card) observer?.observe(card);
-    });
-
-    return () => {
-      cancelAnimationFrame(frameId);
-      observer?.disconnect();
-      handleIntersect.cancel();
-    };
-  }, [needAnimation]);
+  const { goToSlide, isMuted } = useDeck();
 
   return (
-    <section id="commercial" className="py-16 md:py-32 px-6 md:px-24 bg-zinc-900 relative">
-      <div className="max-w-7xl mx-auto w-full">
+    <section className="h-full w-full flex flex-col items-center justify-center bg-black px-6 relative overflow-hidden">
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0 opacity-30">
+        <video
+          autoPlay
+          muted={isMuted}
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/assets/commercial-ad.mp4"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black" />
+      </div>
+
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle,rgba(201,169,110,0.1)_0%,transparent_70%)]" />
+      </div>
+
+      <div className="max-w-7xl mx-auto w-full text-center z-10 py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-20 text-center"
+          className="mb-10"
         >
-          <span className="text-zinc-500 uppercase tracking-widest text-xs mb-4 block outfit">
-            The Next Chapter
+          <span className="text-[var(--gold)] uppercase tracking-[0.4em] text-[10px] mb-4 block outfit font-bold">
+            Retail Environment
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold outfit uppercase mb-6">
-            Build Your Legacy <br /> <span className="text-zinc-500 italic">With Us</span>
+          <h2 className="text-5xl md:text-7xl font-bold outfit uppercase text-white leading-tight mb-6">
+            520+ brands. <br /> Every category. Every tier.
           </h2>
+          <p className="text-zinc-400 text-base md:text-lg max-w-3xl mx-auto font-light tracking-wide">
+            From global flagships to emerging concepts &mdash; the full retail spectrum under one
+            roof.
+          </p>
         </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {paths.map((path, i) => {
-            const inView = activeVisibleCards.has(i);
-            const cardMotionProps = shouldAnimateCards
-              ? {
-                  initial: { opacity: 0, y: 30 },
-                  animate: inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 },
-                  transition: { duration: 0.8, delay: i * 0.1, ease: "easeOut" as const },
-                }
-              : {
-                  initial: false,
-                  animate: { opacity: 1, y: 0 },
-                  transition: { duration: 0.2 },
-                };
-
-            const hoverProps: Partial<HTMLMotionProps<"div">> =
-              canHover && !isMobile
-                ? {
-                    whileHover: {
-                      y: -15,
-                      scale: 1.02,
-                      transition: { type: "spring", stiffness: 300, damping: 20 },
-                    },
-                  }
-                : {};
-
-            return (
-              <motion.div
-                key={path.title}
-                ref={(el) => {
-                  cardRefs.current[i] = el;
-                }}
-                data-card-index={i}
-                {...cardMotionProps}
-                {...hoverProps}
-                className="p-6 md:p-10 rounded-[2.5rem] glass border border-white/5 flex flex-col justify-between group md:hover:border-white/20 md:hover:shadow-[0_0_50px_rgba(255,255,255,0.1)] transition-all min-h-[400px] md:h-[500px] relative overflow-hidden bg-black/40"
-              >
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
-                <div>
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-zinc-500 mb-4 md:mb-6 block font-bold">
-                    Opportunity Type
-                  </span>
-                  <h3 className="text-2xl md:text-3xl font-bold outfit uppercase text-white mb-4 md:mb-6 leading-tight">
-                    {path.title}
-                  </h3>
-                  <p className="text-zinc-400 text-sm md:text-lg font-light leading-relaxed mb-6 md:mb-8">
-                    {path.desc}
-                  </p>
-
-                  <div className="opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-500 translate-y-4 md:translate-y-4 md:group-hover:translate-y-0">
-                    <div className="h-[1px] w-12 bg-white/20 mb-4" />
-                    <p className="text-[10px] uppercase tracking-widest text-zinc-500 font-bold mb-1">
-                      Platform Insight
-                    </p>
-                    <p className="text-sm text-white font-medium">
-                      {i === 0
-                        ? "98% Luxury Retention"
-                        : i === 1
-                          ? "40M+ Multi-Channel Reach"
-                          : "Flexible Venue Agnostic Site"}
-                    </p>
-                  </div>
-                </div>
-
-                <button className="flex items-center justify-between w-full p-6 bg-white rounded-2xl text-black font-bold uppercase tracking-widest text-xs md:hover:bg-zinc-200 transition-all">
-                  <span>
-                    {i === 0
-                      ? "Request Private Briefing"
-                      : i === 1
-                        ? "Explore Partnership"
-                        : "Check Availability"}
-                  </span>
-                  <ArrowRight size={18} />
-                </button>
-              </motion.div>
-            );
-          })}
-        </div>
 
         <motion.div
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="mt-20 text-center"
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="flex flex-wrap justify-center gap-2 md:gap-4 max-w-4xl mx-auto mb-10"
         >
-          <p className="text-zinc-500 text-xs uppercase tracking-[0.5em] mb-4">
-            Contact Our Commercial Team
-          </p>
-          <p className="text-white text-base md:text-2xl font-light outfit break-all md:break-normal">
-            leasing@americandream.com | +1 833 263 7326
-          </p>
+          {brands.map((brand, i) => (
+            <div
+              key={brand}
+              className="px-4 py-2 md:px-6 md:py-3 rounded-md bg-zinc-900/50 border border-white/5 text-zinc-300 text-[10px] md:text-sm font-medium hover:border-[var(--gold)]/30 transition-all cursor-default"
+            >
+              {brand}
+            </div>
+          ))}
         </motion.div>
-      </div>
 
-      {/* Footer Branding */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-full text-center opacity-20 user-select-none pointer-events-none">
-        <span className="outfit text-[12vw] font-bold uppercase tracking-tighter text-zinc-800 leading-none">
-          American Dream
-        </span>
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          onClick={() => goToSlide(7)}
+          className="px-12 py-5 bg-[var(--gold)] text-black text-[10px] uppercase tracking-[0.3em] font-black hover:bg-white transition-all duration-500 rounded-sm"
+        >
+          View Leasing Opportunities
+        </motion.button>
       </div>
     </section>
   );

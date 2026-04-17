@@ -1,21 +1,23 @@
-﻿export const SECTION_IDS = [
+export const SECTION_IDS = [
   "hero",
   "scale",
+  "commercial",
   "luxury",
   "dining",
   "entertainment",
   "events",
-  "commercial",
+  "contact",
 ] as const;
 
 export type SectionId = (typeof SECTION_IDS)[number];
 
 export const SECTION_NAV_ITEMS: { id: SectionId; label: string }[] = [
-  { id: "hero", label: "Intro" },
-  { id: "scale", label: "Scale" },
+  { id: "hero", label: "Overview" },
+  { id: "scale", label: "Property" },
+  { id: "commercial", label: "Retail" },
   { id: "luxury", label: "Luxury" },
   { id: "dining", label: "Dining" },
-  { id: "entertainment", label: "Play" },
+  { id: "entertainment", label: "Attractions" },
   { id: "events", label: "Events" },
-  { id: "commercial", label: "Join" },
+  { id: "contact", label: "Contact" },
 ];

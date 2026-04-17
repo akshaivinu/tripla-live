@@ -1,41 +1,37 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
+import { useDeck } from "@/components/context/DeckContext";
 
 const stats = [
-  { label: "Total Square Feet", value: "3M+", sub: "Spanning across 3 million sq. ft." },
-  { label: "Annual Visitors", value: "40M+", sub: "Attracting global foot traffic" },
-  { label: "Entertainment Mix", value: "55%", sub: "Highest ratio in North America" },
-  { label: "Retail Partners", value: "450+", sub: "Global flagship destinations" },
+  { label: "Annual Visitors", value: "40M", sub: "Global foot traffic" },
+  { label: "SQ FT GLA", value: "5.6M", sub: "Strategic retail footprint" },
+  { label: "Retail Stores", value: "520+", sub: "World-class partners" },
+  { label: "Annual Sales", value: "$2B+", sub: "Proven economic engine" },
 ];
 
 function Counter({ value, duration = 2 }: { value: string; duration?: number }) {
   const [displayValue, setDisplayValue] = useState(0);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-
   const numericValue = parseInt(value.replace(/[^0-9]/g, ""));
   const suffix = value.replace(/[0-9]/g, "");
 
   useEffect(() => {
-    if (isInView) {
-      let start = 0;
-      const end = numericValue;
-      const stepTime = Math.abs(Math.floor((duration * 1000) / end));
+    let start = 0;
+    const end = numericValue;
+    const stepTime = Math.abs(Math.floor((duration * 1000) / end));
 
-      const timer = setInterval(() => {
-        start += 1;
-        setDisplayValue(start);
-        if (start === end) clearInterval(timer);
-      }, stepTime);
+    const timer = setInterval(() => {
+      start += 1;
+      setDisplayValue(start);
+      if (start === end) clearInterval(timer);
+    }, stepTime);
 
-      return () => clearInterval(timer);
-    }
-  }, [isInView, numericValue, duration]);
+    return () => clearInterval(timer);
+  }, [numericValue, duration]);
 
   return (
-    <span ref={ref}>
+    <span>
       {displayValue}
       {suffix}
     </span>
@@ -43,75 +39,66 @@ function Counter({ value, duration = 2 }: { value: string; duration?: number }) 
 }
 
 export default function ScaleSection() {
+  const { isMuted } = useDeck();
+
   return (
-    <section id="scale" className="py-20 px-6 md:px-24 bg-zinc-950 overflow-hidden relative">
-      <div className="max-w-7xl mx-auto w-full">
+    <section className="h-full w-full flex flex-col items-center justify-center bg-zinc-950 px-6 relative overflow-hidden">
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0 opacity-40">
+        <video
+          autoPlay
+          muted={isMuted}
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/assets/exterior-shot.mp4"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/20 to-black" />
+      </div>
+
+      <div className="max-w-7xl mx-auto w-full text-center py-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="mb-12"
         >
-          <span className="text-zinc-500 uppercase tracking-widest text-xs mb-4 block outfit">
-            Metrics of Success
+          <span className="text-[var(--gold)] uppercase tracking-[0.4em] text-[10px] mb-4 block outfit font-bold">
+            Why This Property
           </span>
-          <h2 className="text-4xl md:text-6xl font-bold outfit uppercase mb-6">
-            Unrivaled Scale. <br /> <span className="text-zinc-500">Unmatched Opportunity.</span>
+          <h2 className="text-4xl md:text-7xl font-bold outfit uppercase text-white leading-tight">
+            The numbers that <br /> define the opportunity
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: i * 0.1 }}
-              className="glass p-6 md:p-8 rounded-2xl border border-white/5 relative overflow-hidden transform-gpu"
-              style={{ perspective: 1000 }}
+              className="bg-zinc-900/50 p-6 md:p-10 rounded-sm border border-white/5 relative group"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 transition-opacity duration-500" />
-              <h3 className="text-5xl font-bold outfit mb-2 text-white transition-colors">
+              <h3 className="text-4xl md:text-6xl font-bold outfit mb-2 md:mb-4 text-white">
                 <Counter value={stat.value} />
               </h3>
-              <p className="text-sm font-medium uppercase tracking-widest text-zinc-400 transition-colors mb-4">
+              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-zinc-500 group-hover:text-[var(--gold)] transition-colors">
                 {stat.label}
               </p>
-              <div className="overflow-hidden h-8 transition-all duration-500 ease-out">
-                <p className="text-xs text-zinc-500 leading-relaxed font-light">{stat.sub}</p>
-              </div>
             </motion.div>
           ))}
         </div>
 
-        <motion.div
+        <motion.p
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="mt-16 p-6 md:p-12 glass-dark rounded-3xl border border-white/5 relative overflow-hidden"
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="mt-12 text-zinc-500 text-[10px] uppercase tracking-widest font-medium"
         >
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-            <div className="max-w-xl">
-              <h4 className="text-2xl font-bold outfit uppercase mb-4">A City Under One Roof</h4>
-              <p className="text-zinc-400 leading-relaxed">
-                American Dream is more than a mall—it is a global destination. Situated within the
-                Meadowlands Sports Complex, just minutes from Manhattan, we command a regional reach
-                of over 20 million people.
-              </p>
-            </div>
-            <div className="flex flex-col gap-2 text-right">
-              <span className="text-4xl font-bold outfit text-white">20M+</span>
-              <span className="text-xs uppercase tracking-[0.3em] text-zinc-500">
-                Regional Reach
-              </span>
-            </div>
-          </div>
-          {/* Subtle background glow */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
-        </motion.div>
+          Located 20 min from MSP Airport &middot; Draws visitors from 150+ countries &middot; Top 5
+          most visited sites in the US
+        </motion.p>
       </div>
     </section>
   );

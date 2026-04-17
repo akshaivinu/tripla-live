@@ -1,76 +1,71 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 
-const MotionImage = motion.create(Image);
+const styles = [
+  {
+    title: "Fine dining",
+    desc: "12 upscale concepts, private dining available",
+  },
+  {
+    title: "Fast casual",
+    desc: "28 concepts, 3,200-seat food court",
+  },
+  {
+    title: "Bars & lounges",
+    desc: "18 concepts, late-night programming",
+  },
+];
 
 export default function DiningSection() {
   return (
-    <section id="dining" className="py-16 md:py-32 px-6 md:px-24 bg-black relative overflow-hidden">
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-20 items-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, rotateY: -10 }}
-          whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="relative order-2 lg:order-1 aspect-video lg:aspect-square rounded-[3rem] overflow-hidden shadow-2xl transform-gpu will-change-transform"
-        >
-          <MotionImage
-            initial={{ scale: 1.2 }}
-            whileInView={{ scale: 1 }}
-            transition={{ duration: 2 }}
-            src="/assets/dining-lifestyle.png"
-            alt="Dining at American Dream"
-            fill
-            className="object-cover opacity-80"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            quality={50}
-          />
-          <div className="absolute inset-0 bg-gradient-to-tr from-black/90 via-black/20 to-transparent" />
-          <div className="absolute bottom-12 left-12">
-            <h3 className="text-3xl font-bold outfit uppercase text-white tracking-widest">
-              Fine Dining Row
-            </h3>
-            <p className="text-zinc-400 text-sm uppercase tracking-[0.3em] mt-3 font-light">
-              Global Culinary Destination
-            </p>
-          </div>
-        </motion.div>
+    <section className="h-full w-full flex flex-col items-center justify-center bg-black px-6 relative overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0 opacity-40">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: "url('/assets/dining-lifestyle.png')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black" />
+      </div>
 
+      <div className="max-w-7xl mx-auto w-full text-center z-10 py-20">
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="order-1 lg:order-2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mb-12"
         >
-          <span className="text-zinc-500 uppercase tracking-widest text-xs mb-4 block outfit">
-            Culinary Excellence
+          <span className="text-[var(--gold)] uppercase tracking-[0.4em] text-[10px] mb-4 block outfit font-bold">
+            Dining & Lifestyle
           </span>
-          <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold outfit uppercase mb-6 md:mb-8 leading-tight text-white">
-            Taste the <br /> <span className="text-gradient">Extraordinary</span>
+          <h2 className="text-4xl md:text-7xl font-bold serif text-white leading-tight mb-6">
+            50+ restaurants. <br /> Food as destination.
           </h2>
-          <p className="text-zinc-400 text-lg mb-10 max-w-lg leading-relaxed font-light">
-            With over 100 food outlets ranging from world-renowned fine dining to elevated casual
-            concepts, American Dream is a global culinary destination in its own right.
+          <p className="text-zinc-400 text-base md:text-lg max-w-3xl mx-auto font-light tracking-wide">
+            From Michelin-recommended chefs to beloved local concepts &mdash; dining that draws
+            visitors on its own.
           </p>
-
-          <div className="space-y-6">
-            <div className="flex items-center gap-6 group">
-              <div className="w-12 h-[1px] bg-zinc-800 group-hover:w-20 transition-all duration-500 bg-white" />
-              <span className="text-sm uppercase tracking-[0.3em] text-zinc-300 font-bold">
-                100+ Dining concepts
-              </span>
-            </div>
-            <div className="flex items-center gap-6 group">
-              <div className="w-12 h-[1px] bg-zinc-800 group-hover:w-20 transition-all duration-500 bg-white" />
-              <span className="text-sm uppercase tracking-[0.3em] text-zinc-300 font-bold">
-                Fine Dining Row
-              </span>
-            </div>
-          </div>
         </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
+          {styles.map((style, i) => (
+            <motion.div
+              key={style.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 + i * 0.1 }}
+              className="p-6 md:p-8 pb-10 md:pb-12 rounded-sm bg-zinc-900/40 border border-white/5 text-center flex flex-col items-center group hover:bg-zinc-900/60 transition-all"
+            >
+              <h3 className="text-lg md:text-xl font-bold outfit text-white uppercase tracking-widest mb-3 md:mb-4 group-hover:text-[var(--gold)] transition-colors">
+                {style.title}
+              </h3>
+              <p className="text-[10px] text-zinc-500 leading-relaxed max-w-[200px]">
+                {style.desc}
+              </p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
