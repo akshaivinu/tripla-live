@@ -20,7 +20,7 @@ const EventsSection = dynamic(() => import("@/components/sections/EventsSection"
 const CommercialSection = dynamic(() => import("@/components/sections/CommercialSection"), { loading: () => <SectionSkeleton />, ssr: false });
 const ContactSection = dynamic(() => import("@/components/sections/ContactSection"), { loading: () => <SectionSkeleton />, ssr: false });
 
-const SLIDE_COMPONENTS: Record<string, React.FC> = {
+const SLIDE_COMPONENTS: Record<string, React.ComponentType<any>> = {
   hero: Hero,
   scale: ScaleSection,
   luxury: LuxurySection,

@@ -28,7 +28,6 @@ export const metadata: Metadata = {
     "tenant partnerships",
   ],
   authors: [{ name: "American Dream Commerce Team", url: "https://americandream.com" }],
-  colorScheme: "dark",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -68,6 +67,10 @@ export const metadata: Metadata = {
     "geo.position": "40.8135;-74.0700",
     ICBM: "40.8135,-74.0700",
   },
+};
+
+export const viewport = {
+  colorScheme: "dark",
 };
 
 export default function RootLayout({
