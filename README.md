@@ -54,6 +54,10 @@ Use the standard Next.js commands from the workspace root.
 - Favicons are supplied by `public/assets/logo.png` and wired in `src/app/layout.tsx`.
 - The project is optimized for Turbopack (`npm run dev`) and still builds via standard Next.js commands (`npm run build`, `npm run start`).
 
+## Asset Generation
+
+All image and video assets located within `public/assets` (including high-fidelity property shots, dining backgrounds, and entertainment attractions) were generated leveraging advanced AI models—specifically **ChatGPT**, **DALL-E**, and **Grok**. This approach ensures a premium, luxury-grade, and cohesive visual aesthetic without relying on conventional stock photography or external third-party footage.
+
 ## Visual & UX References
 
 - DigiDeck / Caruso / Celebrity Cruises / Tottenham Hotspur (interactive deck pace, big bold headers, control over journey)
