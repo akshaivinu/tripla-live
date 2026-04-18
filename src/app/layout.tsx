@@ -79,7 +79,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`no-scrollbar ${inter.variable} ${outfit.variable} ${playfair.variable}`}>
+    <html
+      lang="en"
+      className={`no-scrollbar ${inter.variable} ${outfit.variable} ${playfair.variable}`}
+    >
       <body>{children}</body>
     </html>
   );

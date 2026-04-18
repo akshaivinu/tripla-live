@@ -45,7 +45,7 @@ export default function LandingStage() {
         >
           <span className="relative z-10">Enter Experience</span>
         </motion.button>
-        
+
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.4 }}

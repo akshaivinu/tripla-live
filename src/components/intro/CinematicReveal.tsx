@@ -8,7 +8,7 @@ const STARS = Array.from({ length: 40 }, (_, i) => ({
   id: i,
   x: ((i * 137.5) % 100).toFixed(2), // Golden angle distribution — no Math.random
   y: ((i * 73.1) % 100).toFixed(2),
-  size: (1 + (i % 3)),
+  size: 1 + (i % 3),
   delay: `${(i * 0.15) % 3}s`,
   duration: `${2 + (i % 4)}s`,
 }));
@@ -16,7 +16,6 @@ const STARS = Array.from({ length: 40 }, (_, i) => ({
 export default function CinematicReveal() {
   return (
     <div className="fixed inset-0 z-[700] bg-[#02040a] flex items-center justify-center overflow-hidden">
-      
       {/* Starfield — CSS-only animation. Zero JS timelines. */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">

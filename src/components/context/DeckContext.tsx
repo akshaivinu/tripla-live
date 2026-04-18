@@ -1,6 +1,14 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef, useMemo } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useMemo,
+} from "react";
 import { SECTION_IDS, SectionId } from "@/constants/sections";
 
 interface DeckContextType {
@@ -82,7 +90,6 @@ export function DeckProvider({ children }: { children: React.ReactNode }) {
       }
     };
 
-
     window.addEventListener("keydown", handleKeyDown);
 
     return () => {
@@ -110,14 +117,25 @@ export function DeckProvider({ children }: { children: React.ReactNode }) {
       next,
       prev,
     }),
-    [activeIndex, activeId, isMuted, isTOCOpen, hasStarted, introComplete, direction, toggleMute, setTOCOpen, setHasStarted, setIntroComplete, goToSlide, next, prev]
+    [
+      activeIndex,
+      activeId,
+      isMuted,
+      isTOCOpen,
+      hasStarted,
+      introComplete,
+      direction,
+      toggleMute,
+      setTOCOpen,
+      setHasStarted,
+      setIntroComplete,
+      goToSlide,
+      next,
+      prev,
+    ]
   );
 
-  return (
-    <DeckContext.Provider value={contextValue}>
-      {children}
-    </DeckContext.Provider>
-  );
+  return <DeckContext.Provider value={contextValue}>{children}</DeckContext.Provider>;
 }
 
 export function useDeck() {

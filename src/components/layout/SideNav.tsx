@@ -12,7 +12,7 @@ const SideNav = memo(function SideNav() {
     <nav className="fixed left-8 top-1/2 -translate-y-1/2 z-[100] hidden lg:flex flex-col items-center gap-6">
       {/* Vertical Track */}
       <div className="absolute top-0 bottom-0 w-[1px] bg-white/10 left-1/2 -translate-x-1/2" />
-      <motion.div 
+      <motion.div
         className="absolute top-0 w-[1px] bg-[var(--gold)]/40 left-1/2 -translate-x-1/2"
         animate={{ height: `${(activeIndex / (SECTION_IDS.length - 1)) * 100}%` }}
         transition={{ duration: 0.8, ease: "circOut" }}
@@ -40,15 +40,14 @@ const SideNav = memo(function SideNav() {
                 scale: activeIndex === index ? 1.2 : 1,
                 backgroundColor: activeIndex === index ? "#c9a96e" : "rgba(255,255,255,0.4)",
               }}
-              className="w-1 h-1 rounded-full z-10 transition-colors duration-500"
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="w-1 h-1 rounded-full z-10"
             />
             {activeIndex === index && (
               <motion.div
                 layoutId="active-ring"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
                 className="absolute inset-0 border border-[var(--gold)] rounded-full"
-                transition={{ duration: 0.8, ease: "circOut" }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
               />
             )}
           </div>

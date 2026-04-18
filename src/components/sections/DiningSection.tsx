@@ -1,71 +1,113 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
-const styles = [
-  {
-    title: "Fine dining",
-    desc: "12 upscale concepts, private dining available",
-  },
-  {
-    title: "Fast casual",
-    desc: "28 concepts, 3,200-seat food court",
-  },
-  {
-    title: "Bars & lounges",
-    desc: "18 concepts, late-night programming",
-  },
-];
-
-export default function DiningSection() {
+export default function DiningSlide() {
   return (
-    <section className="h-full w-full flex flex-col items-center justify-center bg-black px-4 sm:px-6 relative overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0 z-0 opacity-40">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/assets/dining-lifestyle.png')" }}
+    <section className="relative h-screen w-full overflow-hidden bg-black text-white">
+      {/* Background */}
+      <div className="absolute inset-0">
+        <Image
+          src="/assets/dining-lifestyle.png"
+          alt="Luxury dining experience"
+          fill
+          priority
+          className="object-cover opacity-60"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/90" />
       </div>
 
-      <div className="max-w-7xl mx-auto w-full text-center z-10 py-8 sm:py-12 md:py-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-4 sm:mb-6 md:mb-12"
-        >
-          <span className="text-[var(--gold)] uppercase tracking-[0.4em] text-[9px] sm:text-[10px] mb-2 sm:mb-4 block outfit font-bold">
-            Dining &amp; Lifestyle
-          </span>
-          <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold serif text-white leading-tight mb-2 sm:mb-4">
-            50+ restaurants. Food as destination.
-          </h2>
-          <p className="text-zinc-400 text-xs sm:text-sm md:text-base max-w-3xl mx-auto font-light tracking-wide">
-            From Michelin-recommended chefs to beloved local concepts — dining that draws
-            visitors on its own.
-          </p>
-        </motion.div>
+      {/* Main Layout */}
+      <div className="relative z-10 grid h-full grid-cols-1 md:grid-cols-2 items-center px-6 md:px-16">
+        {/* LEFT SIDE */}
+        <div className="max-w-xl">
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-[clamp(2rem,4vw,3.5rem)] font-bold uppercase tracking-[0.08em]"
+          >
+            Dining That Drives Traffic.
+          </motion.h2>
 
-        <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 max-w-5xl mx-auto">
-          {styles.map((style, i) => (
-            <motion.div
-              key={style.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 + i * 0.1 }}
-              className="p-3 sm:p-6 md:p-8 rounded-sm bg-zinc-900/40 border border-white/5 text-center flex flex-col items-center group hover:bg-zinc-900/60 transition-colors"
-            >
-              <h3 className="text-xs sm:text-base md:text-xl font-bold outfit text-white uppercase tracking-wider sm:tracking-widest mb-1 sm:mb-3 md:mb-4 group-hover:text-[var(--gold)] transition-colors leading-tight">
-                {style.title}
-              </h3>
-              <p className="text-[8px] sm:text-[10px] text-zinc-500 leading-relaxed max-w-[200px]">
-                {style.desc}
-              </p>
-            </motion.div>
-          ))}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="mt-6 text-xs md:text-sm uppercase tracking-[0.28em] text-zinc-400"
+          >
+            Attracts, retains, and extends customer visits
+          </motion.p>
+
+          {/* HERO METRIC */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.8 }}
+            className="mt-12"
+          >
+            <h3 className="text-[clamp(4rem,8vw,6rem)] font-bold text-[var(--gold)]">50+</h3>
+            <p className="mt-3 text-sm uppercase tracking-[0.4em]">Restaurants</p>
+          </motion.div>
         </div>
+
+        {/* RIGHT SIDE IMAGE STACK */}
+        <div className="hidden md:flex justify-center bottom-20 relative">
+          <div className="relative w-[320px] h-[420px]">
+            {/* Image 1 */}
+            <motion.div
+              initial={{ opacity: 0, y: 40, rotate: -6 }}
+              animate={{ opacity: 1, y: 0, rotate: -4 }}
+              transition={{ delay: 0.6 }}
+              className="absolute w-full h-full rounded-xl overflow-hidden shadow-2xl"
+            >
+              <Image src="/assets/dining-1.jpg" alt="Fine dining" fill className="object-cover" />
+            </motion.div>
+
+            {/* Image 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 40, rotate: 6 }}
+              animate={{ opacity: 1, y: 20, rotate: 4 }}
+              transition={{ delay: 0.8 }}
+              className="absolute w-full h-full rounded-xl overflow-hidden shadow-2xl top-10 left-10"
+            >
+              <Image src="/assets/dining-2.jpg" alt="Bar lounge" fill className="object-cover" />
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Categories */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2 }}
+        className="absolute bottom-30 w-full flex justify-center px-6"
+      >
+        <div className="flex gap-12 md:gap-16 text-center">
+          <div>
+            <p className="text-lg font-semibold uppercase tracking-widest">Fine Dining</p>
+            <p className="text-xs text-zinc-400 uppercase">High Spend</p>
+          </div>
+
+          <div>
+            <p className="text-lg font-semibold uppercase tracking-widest">Fast Casual</p>
+            <p className="text-xs text-zinc-400 uppercase">Volume</p>
+          </div>
+
+          <div>
+            <p className="text-lg font-semibold uppercase tracking-widest">Bars & Lounges</p>
+            <p className="text-xs text-zinc-400 uppercase">Night Traffic</p>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Bottom Insight */}
+      <div className="absolute bottom-15 w-full text-center">
+        <p className="text-[var(--gold)] text-xs uppercase tracking-[0.3em]">
+          Drives longer stays, higher spend, and repeat visitation
+        </p>
       </div>
     </section>
   );

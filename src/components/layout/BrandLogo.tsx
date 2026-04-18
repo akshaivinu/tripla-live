@@ -23,7 +23,7 @@ export default function BrandLogo() {
           className="object-contain p-2"
         />
       </div>
-      
+
       <div className="flex flex-col items-start">
         <span className="text-white font-bold outfit uppercase tracking-[0.3em] text-[10px]">
           American Dream

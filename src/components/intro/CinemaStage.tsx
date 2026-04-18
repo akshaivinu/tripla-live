@@ -23,7 +23,7 @@ export default function CinemaStage() {
   useEffect(() => {
     // Stage 2: Video Playback
     if (!isRevealing && videoRef.current) {
-      videoRef.current.play().catch(err => console.error("Autoplay failed:", err));
+      videoRef.current.play().catch((err) => console.error("Autoplay failed:", err));
     }
   }, [isRevealing]);
 
@@ -67,19 +67,16 @@ export default function CinemaStage() {
             onEnded={() => setIntroComplete(true)}
             className="w-full h-full object-cover scale-[1.15] brightness-[0.85] contrast-[1.1]"
           />
-          
+
           {/* Cinematic Post-Processing Overlay */}
           <div className="absolute inset-0 pointer-events-none z-20 shadow-[inset_0_0_200px_rgba(0,0,0,0.8)]" />
           <div className="absolute inset-0 pointer-events-none z-20 bg-gradient-to-t from-black/60 via-transparent to-black/60" />
         </div>
-        
+
         {/* Overlay UI */}
         <div className="absolute inset-0 z-30 pointer-events-none">
           <div className="absolute top-0 left-0 right-0 h-1 bg-white/10">
-            <motion.div 
-              className="h-full bg-[var(--gold)]"
-              style={{ width: `${progress}%` }}
-            />
+            <motion.div className="h-full bg-[var(--gold)]" style={{ width: `${progress}%` }} />
           </div>
 
           <div className="absolute bottom-12 left-12 right-12 flex justify-between items-center pointer-events-auto">
@@ -97,7 +94,10 @@ export default function CinemaStage() {
               <span className="text-[10px] uppercase tracking-[0.4em] font-black text-white">
                 Skip Intro
               </span>
-              <FastForward size={14} className="text-[var(--gold)] group-hover:translate-x-1 transition-transform" />
+              <FastForward
+                size={14}
+                className="text-[var(--gold)] group-hover:translate-x-1 transition-transform"
+              />
             </button>
           </div>
         </div>

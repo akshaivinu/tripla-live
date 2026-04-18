@@ -1,78 +1,88 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useDeck } from "@/components/context/DeckContext";
+import Image from "next/image";
 
-export default function EventsSection() {
-  const { isMuted } = useDeck();
+const PROOF_ITEMS = ["Nike", "Samsung", "TikTok", "Formula 1", "LEGO", "Launch Events"];
 
+export default function EventsSlide() {
   return (
-    <section className="h-full w-full flex flex-col items-center justify-center bg-black px-4 sm:px-6 relative overflow-hidden">
-      <div className="absolute inset-0 opacity-40">
-        <video
-          autoPlay
-          muted={isMuted}
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          src="/assets/walkthrough.mp4"
+    <section className="relative h-screen w-full overflow-hidden bg-black text-white">
+      {/* Background */}
+      <div className="absolute inset-0">
+        <Image
+          src="/assets/events-platform.png"
+          alt="Large scale brand activation event"
+          fill
+          priority
+          className="object-cover opacity-85"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/20 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/90" />
       </div>
 
-      <div className="max-w-7xl mx-auto w-full text-center z-10 py-8 sm:py-12 md:py-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <span className="text-[var(--gold)] uppercase tracking-[0.4em] text-[9px] sm:text-[10px] mb-2 sm:mb-4 block outfit font-bold">
-            Platform Power
-          </span>
-          <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold outfit uppercase text-white leading-tight mb-2 sm:mb-4">
-            Where Brands Take Center Stage
-          </h2>
-          <p className="text-zinc-400 text-xs sm:text-sm md:text-base max-w-3xl mx-auto font-light tracking-wide mb-6 sm:mb-8">
-            From global concert series to exclusive brand takeovers, American Dream provides the
-            infrastructure for infinite capability.
-          </p>
-        </motion.div>
+      {/* Main Layout */}
+      <div className="relative z-10 h-full grid grid-cols-1 md:grid-cols-2 px-6 md:px-16 items-center">
+        {/* LEFT SIDE */}
+        <div className="max-w-xl">
+          {/* Headline */}
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-[clamp(2.5rem,4.5vw,4rem)] font-bold uppercase leading-tight tracking-[-0.02em]"
+          >
+            A Platform For Real-World Activation
+          </motion.h2>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="grid grid-cols-3 gap-4 sm:gap-6 md:gap-12 max-w-3xl mx-auto"
-        >
-          <div className="text-center">
-            <span className="text-xl sm:text-2xl md:text-3xl font-bold outfit text-white block">50,000+</span>
-            <span className="text-[8px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-zinc-500 font-bold">
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="mt-6 text-sm md:text-base text-white/70 leading-relaxed max-w-md"
+          >
+            Built for launches, takeovers, broadcasts, and large-scale brand moments that convert
+            attention into traffic.
+          </motion.p>
+        </div>
+
+        {/* RIGHT SIDE (HERO METRIC) */}
+        <div className="flex flex-col items-center md:items-end">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+            className="text-right"
+          >
+            <h3 className="text-[clamp(4.5rem,9vw,7rem)] font-bold tracking-[-0.04em]">50,000+</h3>
+            <p className="mt-2 text-xs md:text-sm uppercase tracking-[0.35em] text-[var(--gold)]">
               Event Capacity
-            </span>
-          </div>
-          <div className="text-center">
-            <span className="text-xl sm:text-2xl md:text-3xl font-bold outfit text-white block">Infinite</span>
-            <span className="text-[8px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-zinc-500 font-bold">
-              Activation Space
-            </span>
-          </div>
-          <div className="text-center">
-            <span className="text-xl sm:text-2xl md:text-3xl font-bold outfit text-white block">Global</span>
-            <span className="text-[8px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] text-zinc-500 font-bold">
-              Broadcast Power
-            </span>
-          </div>
-        </motion.div>
-
-        <motion.button
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-6 sm:mt-8 md:mt-12 px-8 sm:px-10 py-3 sm:py-4 border border-white/20 text-white text-[9px] sm:text-[10px] uppercase tracking-[0.3em] font-black hover:bg-white hover:text-black transition-colors duration-500 rounded-sm"
-        >
-          Explore Case Studies
-        </motion.button>
+            </p>
+          </motion.div>
+        </div>
       </div>
+
+      {/* Brand Proof Strip */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1 }}
+        className="absolute bottom-18 w-full flex justify-center px-6"
+      >
+        <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 max-w-5xl">
+          {PROOF_ITEMS.map((item, index) => (
+            <motion.span
+              key={item}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.1 + index * 0.05 }}
+              className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-white/60"
+            >
+              {item}
+            </motion.span>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 }

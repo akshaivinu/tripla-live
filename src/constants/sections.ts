@@ -12,12 +12,12 @@ export const SECTION_IDS = [
 export type SectionId = (typeof SECTION_IDS)[number];
 
 export const SECTION_NAV_ITEMS: { id: SectionId; label: string; hasVideo?: boolean }[] = [
-  { id: "hero", label: "Overview", hasVideo: true },
-  { id: "scale", label: "Property", hasVideo: true },
-  { id: "commercial", label: "Retail", hasVideo: true },
-  { id: "luxury", label: "Luxury" },
-  { id: "dining", label: "Dining" },
-  { id: "entertainment", label: "Attractions" },
-  { id: "events", label: "Events", hasVideo: true },
-  { id: "contact", label: "Contact" },
+  { id: "hero", label: "Hook", hasVideo: true },
+  { id: "scale", label: "The Opportunity", hasVideo: true },
+  { id: "commercial", label: "The Ecosystem", hasVideo: true },
+  { id: "luxury", label: "Value: Luxury" },
+  { id: "dining", label: "Value: Dining" },
+  { id: "entertainment", label: "Value: Attractions" },
+  { id: "events", label: "Proof: Events", hasVideo: true },
+  { id: "contact", label: "CTA Form" },
 ];

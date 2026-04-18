@@ -6,80 +6,114 @@ import Image from "next/image";
 const attractions = [
   {
     title: "Nickelodeon Universe",
-    desc: "The largest indoor theme park in North America.",
     image: "/assets/nickelodeon-universe.png",
-    fallback:
-      "https://images.unsplash.com/photo-1513297845732-05014e5b51d2?auto=format&fit=crop&q=80&w=1000",
   },
   {
     title: "DreamWorks Water Park",
-    desc: "Record-breaking slides and year-round tropical climate.",
     image: "/assets/dreamworks-waterpark.png",
-    fallback:
-      "https://images.unsplash.com/photo-1563298723-dcfebaa392e3?auto=format&fit=crop&q=80&w=1000",
   },
   {
     title: "Big SNOW",
-    desc: "North America's only indoor real-snow ski resort.",
     image: "/assets/big-snow.png",
-    fallback:
-      "https://images.unsplash.com/photo-1551698618-1fed5d9e1ff2?auto=format&fit=crop&q=80&w=1000",
   },
 ];
 
-export default function EntertainmentSection() {
+export default function EntertainmentSlide() {
   return (
-    <section className="h-full w-full flex flex-col items-center justify-center bg-zinc-950 px-4 sm:px-6 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto w-full z-10 py-8 sm:py-12 md:py-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-4 sm:mb-6 md:mb-10 text-center"
-        >
-          <span className="text-[var(--gold)] uppercase tracking-[0.4em] text-[9px] sm:text-[10px] mb-2 sm:mb-4 block outfit font-bold">
-            Immersive Attractions
-          </span>
-          <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-bold outfit uppercase text-white leading-tight mb-2 sm:mb-3">
-            World-Class Entertainment
-          </h2>
-          <p className="text-zinc-400 text-xs sm:text-sm md:text-base max-w-3xl mx-auto font-light tracking-wide">
-            Over 50% of the property is dedicated to attractions that drive tens of millions of visits annually.
-          </p>
-        </motion.div>
+    <section className="relative h-screen w-full overflow-hidden bg-black text-white">
+      {/* Background Crossfade */}
+      <div className="absolute inset-0">
+        {attractions.map((attr, i) => (
+          <motion.div
+            key={attr.title}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: [0, 1, 1, 0] }}
+            transition={{
+              duration: 6,
+              times: [0, 0.2, 0.8, 1],
+              delay: i * 15,
+              ease: "easeInOut",
+              repeat: Infinity,
+            }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={attr.image}
+              alt={attr.title}
+              fill
+              className="object-cover scale-[1.04] brightness-[0.75]"
+              priority={i === 0}
+            />
 
-        <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-6">
-          {attractions.map((attr, i) => (
-            <motion.div
-              key={attr.title}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 + i * 0.1 }}
-              className="relative aspect-[3/4] sm:aspect-video rounded-sm overflow-hidden group"
-            >
-              <Image
-                src={attr.image}
-                alt={attr.title}
-                fill
-                sizes="(max-width: 768px) 33vw, 25vw"
-                className="object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src = attr.fallback;
-                }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
-              <div className="absolute bottom-2 left-2 right-2 sm:bottom-4 sm:left-4 sm:right-4 md:bottom-6 md:left-6 md:right-6">
-                <h3 className="text-[10px] sm:text-sm md:text-xl font-bold outfit text-white uppercase tracking-wider mb-0 sm:mb-1 md:mb-2 leading-tight">
-                  {attr.title}
-                </h3>
-                <p className="text-[7px] sm:text-[8px] md:text-[10px] text-zinc-400 uppercase tracking-widest font-medium hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity">
-                  {attr.desc}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/40" />
+
+            {/* Attraction Label (IMPORTANT) */}
+            <div className="absolute bottom-35 w-full text-center">
+              <p className="text-xs uppercase tracking-[0.4em] text-white/60">Destination Proof</p>
+              <h3 className="mt-2 text-[clamp(1.8rem,4vw,3rem)] font-bold uppercase tracking-[0.1em]">
+                {attr.title}
+              </h3>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 flex h-full flex-col items-center  text-center px-6">
+        {/* Label */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-[10px] uppercase tracking-[0.4em] text-[var(--gold)]"
+        >
+          Unfair Advantage
+        </motion.p>
+
+        {/* HERO METRIC */}
+        <motion.h2
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+          className="mt-6 text-[clamp(6rem,14vw,12rem)] font-bold tracking-[-0.05em] text-[var(--gold)] leading-none"
+        >
+          55%
+        </motion.h2>
+
+        <p className="text-xs uppercase tracking-[0.4em] text-white/70 mt-2">Of The Property</p>
+
+        {/* Statement */}
+        <motion.h3
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="mt-8 text-[clamp(1.6rem,3.5vw,2.6rem)] font-bold uppercase tracking-[0.12em] max-w-3xl"
+        >
+          This is not a mall.
+          <br />
+          It’s an entertainment platform.
+        </motion.h3>
+
+        {/* Supporting */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9 }}
+          className="mt-6 text-xs md:text-sm uppercase tracking-[0.3em] text-white/60"
+        >
+          Attractions that drive tens of millions of visits annually
+        </motion.p>
+
+        {/* Bottom Line */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2 }}
+          className="absolute bottom-25 text-[10px] md:text-xs uppercase tracking-[0.25em] text-zinc-400"
+        >
+          Drives year-round traffic, repeat visitation, and cross-category spend
+        </motion.p>
       </div>
     </section>
   );
