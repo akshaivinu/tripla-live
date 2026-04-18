@@ -50,7 +50,7 @@ const DeckPlayerBar = memo(function DeckPlayerBar() {
                 key={`prev-${activeIndex}`}
                 initial={false}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
+                exit={{ opacity: 0 }}
                 transition={{ duration: 0.4 }}
                 onClick={prev}
                 className="pointer-events-auto text-[12px] uppercase tracking-[0.12em] text-white/50 transition-opacity hover:opacity-100 hover:text-white"
@@ -66,9 +66,9 @@ const DeckPlayerBar = memo(function DeckPlayerBar() {
             {nextItem ? (
               <motion.button
                 key={`next-${activeIndex}`}
-                initial={{ opacity: 0, y: 10 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
+                exit={{ opacity: 0 }}
                 transition={{ duration: 0.4 }}
                 onClick={next}
                 className="pointer-events-auto text-[12px] uppercase tracking-[0.12em] text-[var(--gold)] transition-opacity hover:opacity-80"
