@@ -19,7 +19,7 @@ const DeckPlayerBar = memo(function DeckPlayerBar() {
       <div className="relative flex w-full items-end justify-between px-10 pb-8 pt-16 pointer-events-none">
         <motion.div
           key={`current-${activeIndex}`}
-          initial={{ opacity: 0, y: 10 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.4 }}
@@ -48,7 +48,7 @@ const DeckPlayerBar = memo(function DeckPlayerBar() {
             {prevItem ? (
               <motion.button
                 key={`prev-${activeIndex}`}
-                initial={{ opacity: 0, y: 10 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.4 }}

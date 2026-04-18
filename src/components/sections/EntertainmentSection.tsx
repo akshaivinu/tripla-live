@@ -49,7 +49,7 @@ export default function EntertainmentSlide() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/40" />
 
             {/* Attraction Label (IMPORTANT) */}
-            <div className="absolute bottom-35 w-full text-center">
+            <div className="absolute bottom-55 md:bottom-35 w-full text-center">
               <p className="text-xs uppercase tracking-[0.4em] text-white/60">Destination Proof</p>
               <h3 className="mt-2 text-[clamp(1.8rem,4vw,3rem)] font-bold uppercase tracking-[0.1em]">
                 {attr.title}
@@ -110,7 +110,7 @@ export default function EntertainmentSlide() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="absolute bottom-25 text-[10px] md:text-xs uppercase tracking-[0.25em] text-zinc-400"
+          className="absolute bottom-40 md:bottom-25 text-[10px] md:text-xs uppercase tracking-[0.25em] text-zinc-400"
         >
           Drives year-round traffic, repeat visitation, and cross-category spend
         </motion.p>

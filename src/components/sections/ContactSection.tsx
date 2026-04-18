@@ -54,7 +54,7 @@ export default function ContactSlide() {
         {/* Contact (Subtle CTA) */}
         <motion.a
           href="mailto:leasing@americandream.com"
-          initial={{ opacity: 0, y: 10 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
           className="mt-12 text-sm uppercase tracking-[0.3em] text-[var(--gold)] border-b border-[var(--gold)]/40 pb-1 hover:border-[var(--gold)] transition-all"

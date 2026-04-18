@@ -19,7 +19,7 @@ export default function DiningSlide() {
       </div>
 
       {/* Main Layout */}
-      <div className="relative z-10 grid h-full grid-cols-1 md:grid-cols-2 items-center px-6 md:px-16">
+      <div className="relative z-10 grid h-full grid-cols-1 md:grid-cols-2 pt-20 md:items-center px-6 md:px-16">
         {/* LEFT SIDE */}
         <div className="max-w-xl">
           <motion.h2
@@ -83,7 +83,7 @@ export default function DiningSlide() {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2 }}
-        className="absolute bottom-30 w-full flex justify-center px-6"
+        className="absolute bottom-50 md:bottom-30 w-full flex justify-center px-6"
       >
         <div className="flex gap-12 md:gap-16 text-center">
           <div>
@@ -104,7 +104,7 @@ export default function DiningSlide() {
       </motion.div>
 
       {/* Bottom Insight */}
-      <div className="absolute bottom-15 w-full text-center">
+      <div className="absolute bottom-35 md:bottom-15 w-full text-center px-5 md:px-0">
         <p className="text-[var(--gold)] text-xs uppercase tracking-[0.3em]">
           Drives longer stays, higher spend, and repeat visitation
         </p>

@@ -20,7 +20,7 @@ export default function LuxurySlide() {
       {/* Main Layout */}
       <div className="relative z-10 h-full grid grid-cols-1 md:grid-cols-2 px-6 md:px-16">
         {/* LEFT SIDE */}
-        <div className="flex flex-col justify-center max-w-xl">
+        <div className="flex pt-20 md:pt-0 flex-col md:justify-center max-w-xl">
           <h2 className="text-[clamp(2rem,4vw,3rem)] italic leading-tight">
             Where luxury brands drive top-tier U.S. retail performance.
           </h2>
@@ -57,7 +57,7 @@ export default function LuxurySlide() {
       </div>
 
       {/* Bottom Strip */}
-      <div className="absolute bottom-10 w-full flex justify-center gap-12 md:gap-20 py-4 md:py-6">
+      <div className="absolute bottom-20 md:bottom-10 w-full flex justify-center gap-12 md:gap-20 py-4 md:py-6">
         <div className="text-center">
           <div className="text-2xl md:text-3xl font-bold">48+</div>
           <div className="text-[10px] md:text-xs text-zinc-400 uppercase tracking-widest">
