@@ -6,7 +6,6 @@ import Image from "next/image";
 export default function ScaleSlide() {
   return (
     <section className="relative h-full w-full overflow-hidden bg-black text-white">
-
       {/* Background */}
       <div className="absolute inset-0">
         <Image
@@ -21,7 +20,6 @@ export default function ScaleSlide() {
 
       {/* Content */}
       <div className="relative z-10 flex h-full w-full flex-col items-center justify-center px-6 text-center">
-
         {/* Top Label */}
         <motion.p
           initial={false}
@@ -41,13 +39,10 @@ export default function ScaleSlide() {
           40M
         </motion.h2>
 
-        <p className="text-xs uppercase tracking-[0.4em] text-white/70 mt-2">
-          Annual Visitors
-        </p>
+        <p className="text-xs uppercase tracking-[0.4em] text-white/70 mt-2">Annual Visitors</p>
 
         {/* SIDE METRICS (Responsive Grid instead of absolute) */}
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-8 sm:gap-16 w-full max-w-3xl">
-
           {/* LEFT */}
           <motion.div
             initial={false}
@@ -55,12 +50,8 @@ export default function ScaleSlide() {
             transition={{ delay: 0.4 }}
             className="text-center sm:text-left"
           >
-            <p className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-              520+
-            </p>
-            <p className="text-xs uppercase tracking-[0.3em] text-white/60 mt-1">
-              Retail Tenants
-            </p>
+            <p className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">520+</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-white/60 mt-1">Retail Tenants</p>
           </motion.div>
 
           {/* RIGHT */}
@@ -70,14 +61,11 @@ export default function ScaleSlide() {
             transition={{ delay: 0.4 }}
             className="text-center sm:text-right"
           >
-            <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--gold)]">
-              $2B+
-            </p>
+            <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--gold)]">$2B+</p>
             <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold)]/80 mt-1">
               Annual Sales
             </p>
           </motion.div>
-
         </div>
 
         {/* Bottom Insight */}
@@ -89,7 +77,6 @@ export default function ScaleSlide() {
         >
           Traffic at this scale translates directly into revenue opportunity.
         </motion.p>
-
       </div>
     </section>
   );

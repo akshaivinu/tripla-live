@@ -9,7 +9,6 @@ export default function Hero() {
 
   return (
     <section className="relative h-full w-full flex items-center justify-center px-4 sm:px-6 md:px-10 bg-black overflow-hidden text-white">
-
       {/* Background Video */}
       <div className="absolute inset-0 overflow-hidden">
         <video
@@ -37,7 +36,6 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-[960px] flex flex-col items-center text-center">
-
         {/* Label */}
         <motion.span
           initial={{ opacity: 0 }}
@@ -119,7 +117,6 @@ export default function Hero() {
             <ChevronRight size={16} className="text-[var(--gold)]" />
           </motion.div>
         </motion.button>
-
       </div>
     </section>
   );
