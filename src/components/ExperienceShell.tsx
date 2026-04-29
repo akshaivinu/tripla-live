@@ -6,19 +6,18 @@ import DeckExperience from "@/components/DeckExperience";
 import DeckPlayerBar from "@/components/layout/DeckPlayerBar";
 import Cursor from "@/components/layout/Cursor";
 import ContextBar from "@/components/layout/ContextBar";
-import LeasingModal from "@/components/ui/LeasingModal";
 
 // Dynamic imports for performance can still be used inside SLIDE_COMPONENTS mapping in DeckExperience if needed,
 // for now we use the main layout.
 
 import LandingStage from "./intro/LandingStage";
 import CinemaStage from "./intro/CinemaStage";
+import PersonaStage from "./intro/PersonaStage";
 import { useDeck } from "@/components/context/DeckContext";
 import { AnimatePresence } from "framer-motion";
 
 function ExperienceMain() {
-  const { hasStarted, introComplete, activeId } = useDeck();
-  const [isLeasingOpen, setIsLeasingOpen] = useState(false);
+  const { hasStarted, introComplete, personaSelected, activeId } = useDeck();
   const isHeroSlide = activeId === "hero";
 
   return (
@@ -31,6 +30,8 @@ function ExperienceMain() {
           <LandingStage key="landing" />
         ) : !introComplete ? (
           <CinemaStage key="cinema" />
+        ) : !personaSelected ? (
+          <PersonaStage key="persona" />
         ) : (
           <div className="relative w-full h-full flex flex-col">
             {/* TOP CONTENT AREA (slides live here) */}
@@ -48,8 +49,6 @@ function ExperienceMain() {
           </div>
         )}
       </AnimatePresence>
-
-      <LeasingModal isOpen={isLeasingOpen} onClose={() => setIsLeasingOpen(false)} />
     </main>
   );
 }

@@ -1,9 +1,10 @@
-"use client";
-
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import LeasingModal from "@/components/ui/LeasingModal";
 
 export default function ContactSlide() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black text-white">
       {/* Background */}
@@ -52,15 +53,17 @@ export default function ContactSlide() {
         </motion.p>
 
         {/* Contact (Subtle CTA) */}
-        <motion.a
-          href="mailto:leasing@americandream.com"
-          initial={false}
+        <motion.button
+          onClick={() => setIsOpen(true)}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="mt-12 text-sm uppercase tracking-[0.3em] text-[var(--gold)] border-b border-[var(--gold)]/40 pb-1 hover:border-[var(--gold)] transition-all"
+          className="mt-12 px-10 py-4 bg-[var(--gold)] text-black font-bold uppercase tracking-[0.2em] text-xs rounded-full hover:scale-105 transition-all shadow-[0_10px_30px_rgba(201,169,110,0.3)]"
         >
-          leasing@americandream.com
-        </motion.a>
+          Request Leasing Information
+        </motion.button>
+
+        <LeasingModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
       </div>
     </section>
   );

@@ -1,71 +1,72 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 const attractions = [
   {
     title: "Nickelodeon Universe",
     image: "/assets/nickelodeon-universe.png",
+    description: "Western Hemisphere’s largest indoor theme park.",
   },
   {
     title: "DreamWorks Water Park",
     image: "/assets/dreamworks-waterpark.png",
+    description: "Largest indoor water park in North America.",
   },
   {
     title: "Big SNOW",
     image: "/assets/big-snow.png",
+    description: "North America’s first and only indoor ski slope.",
   },
 ];
 
 export default function EntertainmentSlide() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) return;
+    
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % attractions.length);
+    }, 6000);
+    
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black text-white">
-      {/* Background Crossfade */}
+      {/* Background Viewer */}
       <div className="absolute inset-0">
-        {attractions.map((attr, i) => (
+        <AnimatePresence mode="wait">
           <motion.div
-            key={attr.title}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1, 1, 0] }}
-            transition={{
-              duration: 6,
-              times: [0, 0.2, 0.8, 1],
-              delay: i * 15,
-              ease: "easeInOut",
-              repeat: Infinity,
-            }}
+            key={attractions[activeIndex].title}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
             className="absolute inset-0"
           >
             <Image
-              src={attr.image}
-              alt={attr.title}
+              src={attractions[activeIndex].image}
+              alt={attractions[activeIndex].title}
               fill
-              className="object-cover scale-[1.04] brightness-[0.75]"
-              priority={i === 0}
+              className="object-cover brightness-[0.7]"
+              priority
             />
-
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/60 to-black/40" />
-
-            {/* Attraction Label (IMPORTANT) */}
-            <div className="absolute bottom-55 md:bottom-35 w-full text-center">
-              <p className="text-xs uppercase tracking-[0.4em] text-white/60">Destination Proof</p>
-              <h3 className="mt-2 text-[clamp(1.8rem,4vw,3rem)] font-bold uppercase tracking-[0.1em]">
-                {attr.title}
-              </h3>
-            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
           </motion.div>
-        ))}
+        </AnimatePresence>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex h-full flex-col items-center  text-center px-6">
+      <div className="relative z-10 flex h-full flex-col items-center pt-24 px-6 text-center">
         {/* Label */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
           className="text-[10px] uppercase tracking-[0.4em] text-[var(--gold)]"
         >
           Unfair Advantage
@@ -76,43 +77,64 @@ export default function EntertainmentSlide() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          className="mt-6 text-[clamp(6rem,14vw,12rem)] font-bold tracking-[-0.05em] text-[var(--gold)] leading-none"
+          className="mt-6 text-[clamp(5rem,12vw,10rem)] font-bold tracking-[-0.05em] text-[var(--gold)] leading-none"
         >
           55%
         </motion.h2>
 
-        <p className="text-xs uppercase tracking-[0.4em] text-white/70 mt-2">Of The Property</p>
+        <p className="text-xs uppercase tracking-[0.4em] text-white/70 mt-2">Of The Property Portfolio</p>
 
         {/* Statement */}
         <motion.h3
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
-          className="mt-8 text-[clamp(1.6rem,3.5vw,2.6rem)] font-bold uppercase tracking-[0.12em] max-w-3xl"
+          className="mt-8 text-[clamp(1.4rem,3vw,2.2rem)] font-bold uppercase tracking-[0.12em] max-w-3xl"
         >
           This is not a mall.
           <br />
           It’s an entertainment platform.
         </motion.h3>
 
-        {/* Supporting */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.9 }}
-          className="mt-6 text-xs md:text-sm uppercase tracking-[0.3em] text-white/60"
-        >
-          Attractions that drive tens of millions of visits annually
-        </motion.p>
+        {/* Interactive Attraction Selectors */}
+        <div className="absolute bottom-40 md:bottom-32 flex gap-4 px-6 max-w-4xl overflow-x-auto no-scrollbar">
+          {attractions.map((attr, idx) => (
+            <motion.button
+              key={attr.title}
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
+              onClick={() => setActiveIndex(idx)}
+              className={`relative flex-shrink-0 w-48 p-4 rounded-xl text-left transition-all duration-500 border ${
+                idx === activeIndex 
+                ? "bg-white/10 border-[var(--gold)] shadow-[0_10px_20px_rgba(201,169,110,0.1)]" 
+                : "bg-black/40 border-white/10 hover:border-white/30"
+              }`}
+            >
+              <p className={`text-[9px] uppercase tracking-widest mb-1 ${idx === activeIndex ? "text-[var(--gold)]" : "text-white/40"}`}>
+                Attraction {idx + 1}
+              </p>
+              <h4 className="text-[11px] font-bold uppercase text-white truncate">{attr.title}</h4>
+              <p className="mt-2 text-[9px] text-white/40 leading-tight line-clamp-2">{attr.description}</p>
+              
+              {/* Progress Line */}
+              {idx === activeIndex && (
+                <motion.div 
+                  layoutId="activeBar"
+                  className="absolute bottom-0 left-0 h-0.5 bg-[var(--gold)] w-full"
+                />
+              )}
+            </motion.button>
+          ))}
+        </div>
 
         {/* Bottom Line */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="absolute bottom-40 md:bottom-25 text-[10px] md:text-xs uppercase tracking-[0.25em] text-zinc-400"
+          className="absolute bottom-24 text-[9px] uppercase tracking-[0.3em] text-zinc-500"
         >
-          Drives year-round traffic, repeat visitation, and cross-category spend
+          Click to explore our anchor attractions
         </motion.p>
       </div>
     </section>

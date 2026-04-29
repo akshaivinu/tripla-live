@@ -3,7 +3,18 @@
 import { memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDeck } from "@/components/context/DeckContext";
-import { SECTION_NAV_ITEMS } from "@/constants/sections";
+import { SECTION_NAV_ITEMS, SectionId } from "@/constants/sections";
+
+const TEASERS: Record<SectionId, string> = {
+  hero: "Here's the scale that makes this possible →",
+  scale: "Here's who already chose to be here →",
+  commercial: "Here's what the luxury tier earns →",
+  luxury: "And dining extends every visit →",
+  dining: "Entertainment is the ultimate anchor →",
+  entertainment: "This is why brands activate here →",
+  events: "Now here's your place in it →",
+  contact: "End of presentation",
+};
 
 const DeckPlayerBar = memo(function DeckPlayerBar() {
   const { activeIndex, totalSlides, next, prev } = useDeck();
@@ -62,25 +73,41 @@ const DeckPlayerBar = memo(function DeckPlayerBar() {
             )}
           </AnimatePresence>
 
-          <AnimatePresence mode="wait">
-            {nextItem ? (
-              <motion.button
-                key={`next-${activeIndex}`}
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4 }}
-                onClick={next}
-                className="pointer-events-auto text-[12px] uppercase tracking-[0.12em] text-[var(--gold)] transition-opacity hover:opacity-80"
-              >
-                Next &rarr;
-              </motion.button>
-            ) : (
-              <span className="text-[12px] uppercase tracking-[0.12em] text-[var(--gold)]/50">
-                End Of Deck
-              </span>
-            )}
-          </AnimatePresence>
+          <div className="flex flex-col items-end gap-1">
+            <AnimatePresence mode="wait">
+              {nextItem && (
+                <motion.p
+                  key={`teaser-${activeIndex}`}
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -10 }}
+                  className="text-[9px] uppercase tracking-[0.2em] text-white/30 mb-1"
+                >
+                  {TEASERS[currentItem.id]}
+                </motion.p>
+              )}
+            </AnimatePresence>
+
+            <AnimatePresence mode="wait">
+              {nextItem ? (
+                <motion.button
+                  key={`next-${activeIndex}`}
+                  initial={false}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                  onClick={next}
+                  className="pointer-events-auto text-[12px] uppercase tracking-[0.12em] text-[var(--gold)] transition-opacity hover:opacity-80"
+                >
+                  Next &rarr;
+                </motion.button>
+              ) : (
+                <span className="text-[12px] uppercase tracking-[0.12em] text-[var(--gold)]/50">
+                  End Of Deck
+                </span>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </div>

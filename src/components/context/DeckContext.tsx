@@ -24,6 +24,8 @@ interface DeckContextType {
   setTOCOpen: (open: boolean) => void;
   setHasStarted: (started: boolean) => void;
   setIntroComplete: (complete: boolean) => void;
+  personaSelected: boolean;
+  setPersonaSelected: (selected: boolean) => void;
   goToSlide: (index: number) => void;
   next: () => void;
   prev: () => void;
@@ -38,6 +40,7 @@ export function DeckProvider({ children }: { children: React.ReactNode }) {
   const [isTOCOpen, setIsTOCOpen] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
+  const [personaSelected, setPersonaSelected] = useState(false);
   const lastScrollTime = useRef(0);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
@@ -113,6 +116,8 @@ export function DeckProvider({ children }: { children: React.ReactNode }) {
       setTOCOpen,
       setHasStarted,
       setIntroComplete,
+      personaSelected,
+      setPersonaSelected,
       goToSlide,
       next,
       prev,
@@ -124,11 +129,13 @@ export function DeckProvider({ children }: { children: React.ReactNode }) {
       isTOCOpen,
       hasStarted,
       introComplete,
+      personaSelected,
       direction,
       toggleMute,
       setTOCOpen,
       setHasStarted,
       setIntroComplete,
+      setPersonaSelected,
       goToSlide,
       next,
       prev,
