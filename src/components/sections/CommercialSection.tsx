@@ -14,10 +14,10 @@ const BRANDS = [
 ];
 
 const CATEGORIES = [
-  { id: "luxury", label: "Luxury Retail", conv: 0.015, slots: 2 },
-  { id: "apparel", label: "Premium Apparel", conv: 0.025, slots: 4 },
-  { id: "tech", label: "Tech & Innovation", conv: 0.02, slots: 1 },
-  { id: "lifestyle", label: "Home & Lifestyle", conv: 0.018, slots: 3 },
+  { id: "luxury",    label: "Luxury Retail",    conv: 0.001, slots: 2 },
+  { id: "apparel",   label: "Premium Apparel",  conv: 0.003, slots: 4 },
+  { id: "tech",      label: "Tech & Innovation", conv: 0.002, slots: 1 },
+  { id: "lifestyle", label: "Home & Lifestyle",  conv: 0.0025, slots: 3 },
 ];
 
 export default function CommercialSection() {
@@ -191,9 +191,7 @@ export default function CommercialSection() {
               </div>
 
               <div className="mt-auto">
-                 <p className="text-[10px] italic text-white/30 text-center leading-relaxed">
-                   "When a prospect sees their potential revenue generated from real footfall data... it stops being a pitch and becomes their opportunity."
-                 </p>
+                 {/* Narrative quote removed from UI as per feedback */}
               </div>
             </motion.div>
           </>
