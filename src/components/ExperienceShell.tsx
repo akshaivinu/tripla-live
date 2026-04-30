@@ -34,16 +34,14 @@ function ExperienceMain() {
           <div className="relative w-full h-full flex flex-col">
             {/* TOP CONTENT AREA (slides live here) */}
             <div className="flex-1 relative overflow-hidden">
-              {!isHeroSlide && <ContextBar />}
+              <ContextBar />
               <DeckExperience />
             </div>
 
             {/* RESERVED SPACE FOR PLAYER BAR */}
-            {!isHeroSlide && (
               <div className="relative">
                 <DeckPlayerBar />
               </div>
-            )}
           </div>
         )}
       </AnimatePresence>

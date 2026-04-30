@@ -5,7 +5,15 @@ import { useEffect, useState, useRef } from "react";
 
 export default function ScaleSlide() {
   const [count, setCount] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const duration = 2000;
@@ -28,32 +36,36 @@ export default function ScaleSlide() {
     <section className="relative h-full w-full overflow-hidden bg-black text-white">
 
       {/* VIDEO — left half on desktop */}
-      <div className="absolute inset-0 md:right-[45%] overflow-hidden hidden md:block">
-        <video
-          ref={videoRef}
-          src="/assets/walkthrough.mp4"
-          className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/30 to-black" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />
-      </div>
+      {!isMobile && (
+        <div className="absolute inset-0 md:right-[45%] overflow-hidden hidden md:block">
+          <video
+            ref={videoRef}
+            src="/assets/walkthrough.mp4"
+            className="w-full h-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/30 to-black" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />
+        </div>
+      )}
 
       {/* VIDEO — full-screen background on mobile */}
-      <div className="absolute inset-0 md:hidden overflow-hidden">
-        <video
-          src="/assets/walkthrough.mp4"
-          className="w-full h-full object-cover opacity-30"
-          autoPlay
-          muted
-          loop
-          playsInline
-        />
-        <div className="absolute inset-0 bg-black/60" />
-      </div>
+      {isMobile && (
+        <div className="absolute inset-0 md:hidden overflow-hidden">
+          <video
+            src="/assets/walkthrough.mp4"
+            className="w-full h-full object-cover opacity-30"
+            autoPlay
+            muted
+            loop
+            playsInline
+          />
+          <div className="absolute inset-0 bg-black/60" />
+        </div>
+      )}
 
       {/* CONTENT — right half on desktop */}
       <div className="relative z-10 flex h-full w-full flex-col items-center justify-center md:items-end px-6 md:pr-16 md:pl-0 text-center md:text-right">

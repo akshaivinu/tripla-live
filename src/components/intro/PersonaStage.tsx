@@ -24,7 +24,7 @@ const PERSONAS = [
     label: "Event Organiser",
     description: "Planning large-scale events at world-class venues.",
     icon: Calendar,
-    targetIndex: 7, // Events
+    targetIndex: 6, // Events
   },
 ];
 

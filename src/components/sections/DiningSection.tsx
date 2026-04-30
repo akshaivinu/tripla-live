@@ -17,7 +17,7 @@ export default function DiningSlide() {
       {/* VIDEO — full bleed, dimmed, sets atmosphere */}
       <div className="absolute inset-0">
         <video
-          src="/assets/commercial-ad.mp4"
+          src="/assets/exterior-shot.mp4"
           className="w-full h-full object-cover opacity-25"
           autoPlay
           muted
