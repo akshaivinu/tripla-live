@@ -1,77 +1,128 @@
 "use client";
 
-import Image from "next/image";
+import { motion } from "framer-motion";
+
+const BRANDS = ["Hermès", "Gucci", "Louis Vuitton", "Saint Laurent", "Balenciaga", "Dior", "Prada", "Tiffany & Co."];
 
 export default function LuxurySlide() {
   return (
-    <section className="h-screen w-full bg-black relative overflow-hidden text-white">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <Image
-          src="/assets/luxury-storefronts.png"
-          alt="Luxury storefronts"
-          fill
-          priority
-          className="object-cover opacity-60"
+    <section className="h-full w-full bg-black relative overflow-hidden text-white">
+
+      {/* VIDEO — right two-thirds, primary visual */}
+      <div className="absolute inset-0 md:left-[38%] overflow-hidden">
+        <video
+          src="/assets/exterior-shot.mp4"
+          className="w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
       </div>
 
-      {/* Main Layout */}
-      <div className="relative z-10 h-full grid grid-cols-1 md:grid-cols-2 px-6 md:px-16">
-        {/* LEFT SIDE */}
-        <div className="flex pt-20 md:pt-0 flex-col md:justify-center max-w-xl">
-          <h2 className="text-[clamp(2rem,4vw,3rem)] italic leading-tight">
-            Where luxury brands drive top-tier U.S. retail performance.
-          </h2>
-
-          <p className="mt-6 text-xs uppercase tracking-[0.3em] text-zinc-400">
-            Luxury here is not positioning — it’s performance.
-          </p>
-
-          {/* HERO METRIC */}
-          <div className="mt-12">
-            <h3 className="text-[clamp(3.5rem,8vw,5rem)] font-bold text-[var(--gold)]">$850</h3>
-            <p className="text-sm uppercase tracking-[0.4em] mt-2">Avg Spend Per Visit</p>
-          </div>
-        </div>
-
-        {/* RIGHT SIDE IMAGE STACK */}
-        <div className="hidden md:flex items-center justify-center relative">
-          <div className="relative w-[300px] h-[380px]">
-            <Image
-              src="/assets/the-avenue.png"
-              alt="Luxury avenue storefront"
-              fill
-              className="object-cover rounded-xl shadow-2xl rotate-[-3deg]"
-            />
-
-            <Image
-              src="/assets/luxury-avenue.png"
-              alt="Luxury shopping corridor"
-              fill
-              className="object-cover rounded-xl shadow-2xl rotate-[10deg] top-10 left-8"
-            />
-          </div>
-        </div>
+      {/* Mobile: video full bleed dimmed */}
+      <div className="absolute inset-0 md:hidden overflow-hidden">
+        <video
+          src="/assets/exterior-shot.mp4"
+          className="w-full h-full object-cover opacity-20"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+        <div className="absolute inset-0 bg-black/70" />
       </div>
 
-      {/* Bottom Strip */}
-      <div className="absolute bottom-20 md:bottom-10 w-full flex justify-center gap-12 md:gap-20 py-4 md:py-6">
-        <div className="text-center">
-          <div className="text-2xl md:text-3xl font-bold">48+</div>
-          <div className="text-[10px] md:text-xs text-zinc-400 uppercase tracking-widest">
-            Luxury Brands
-          </div>
-        </div>
+      {/* CONTENT — left panel */}
+      <div className="relative z-10 h-full flex flex-col justify-center px-8 md:px-16 max-w-xl">
 
-        <div className="text-center">
-          <div className="text-2xl md:text-3xl font-bold">#1</div>
-          <div className="text-[10px] md:text-xs text-zinc-400 uppercase tracking-widest">
-            Luxury Corridor
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-[10px] uppercase tracking-[0.4em] text-[var(--gold)] mb-6"
+        >
+          The Avenue — Luxury Wing
+        </motion.p>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-[clamp(2rem,4vw,3.5rem)] font-light italic leading-tight"
+        >
+          Where luxury brands
+          <br />
+          drive top-tier U.S.
+          <br />
+          retail performance.
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="mt-5 text-xs text-white/40 uppercase tracking-[0.25em]"
+        >
+          Luxury here is not positioning — it&apos;s performance.
+        </motion.p>
+
+        {/* Hero metric */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="mt-10 border-l-2 border-[var(--gold)] pl-6"
+        >
+          <p className="text-[clamp(3rem,7vw,5rem)] font-bold text-[var(--gold)] leading-none">$850</p>
+          <p className="text-[10px] uppercase tracking-[0.4em] text-white/40 mt-2">Avg Spend Per Visit</p>
+        </motion.div>
+
+        {/* Sub metrics */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="mt-8 flex gap-10"
+        >
+          <div>
+            <p className="text-2xl font-bold">48+</p>
+            <p className="text-[9px] uppercase tracking-[0.3em] text-white/30 mt-1">Luxury Brands</p>
           </div>
-        </div>
+          <div className="w-px bg-white/10" />
+          <div>
+            <p className="text-2xl font-bold">#1</p>
+            <p className="text-[9px] uppercase tracking-[0.3em] text-white/30 mt-1">Luxury Corridor</p>
+          </div>
+        </motion.div>
+
+        {/* Brand name scroll */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          className="mt-10 flex flex-wrap gap-x-5 gap-y-2"
+        >
+          {BRANDS.map((b) => (
+            <span key={b} className="text-[9px] uppercase tracking-[0.2em] text-white/20 hover:text-white/60 transition-colors cursor-default">
+              {b}
+            </span>
+          ))}
+        </motion.div>
       </div>
+
+      {/* Video label bottom right */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.4 }}
+        className="absolute bottom-28 right-8 z-20 hidden md:block text-right"
+      >
+        <p className="text-[9px] uppercase tracking-[0.3em] text-white/20">
+          The Avenue — American Dream →
+        </p>
+      </motion.div>
     </section>
   );
 }

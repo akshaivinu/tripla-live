@@ -1,10 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { DeckProvider } from "@/components/context/DeckContext";
 import DeckExperience from "@/components/DeckExperience";
 import DeckPlayerBar from "@/components/layout/DeckPlayerBar";
-import Cursor from "@/components/layout/Cursor";
 import ContextBar from "@/components/layout/ContextBar";
 
 // Dynamic imports for performance can still be used inside SLIDE_COMPONENTS mapping in DeckExperience if needed,

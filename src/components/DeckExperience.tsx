@@ -43,6 +43,10 @@ const ContactSection = dynamic(() => import("@/components/sections/ContactSectio
   loading: () => <SectionSkeleton />,
   ssr: false,
 });
+const SponsorshipSection = dynamic(() => import("@/components/sections/SponsorshipSection"), {
+  loading: () => <SectionSkeleton />,
+  ssr: false,
+});
 
 const SLIDE_COMPONENTS: Record<string, React.ComponentType> = {
   hero: Hero,
@@ -52,6 +56,7 @@ const SLIDE_COMPONENTS: Record<string, React.ComponentType> = {
   entertainment: EntertainmentSection,
   events: EventsSection,
   commercial: CommercialSection,
+  sponsorship: SponsorshipSection,
   contact: ContactSection,
 };
 

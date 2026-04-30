@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { useDeck } from "@/components/context/DeckContext";
 import { Grid } from "lucide-react";
 

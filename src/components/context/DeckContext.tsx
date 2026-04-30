@@ -6,7 +6,6 @@ import React, {
   useState,
   useEffect,
   useCallback,
-  useRef,
   useMemo,
 } from "react";
 import { SECTION_IDS, SectionId } from "@/constants/sections";
@@ -41,8 +40,6 @@ export function DeckProvider({ children }: { children: React.ReactNode }) {
   const [hasStarted, setHasStarted] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
   const [personaSelected, setPersonaSelected] = useState(false);
-  const lastScrollTime = useRef(0);
-  const touchStart = useRef<{ x: number; y: number } | null>(null);
 
   const goToSlide = useCallback(
     (index: number) => {
@@ -68,8 +65,8 @@ export function DeckProvider({ children }: { children: React.ReactNode }) {
     }
   }, [activeIndex]);
 
-  const toggleMute = () => setIsMuted((prev) => !prev);
-  const setTOCOpen = (open: boolean) => setIsTOCOpen(open);
+  const toggleMute = useCallback(() => setIsMuted((prev) => !prev), []);
+  const setTOCOpen = useCallback((open: boolean) => setIsTOCOpen(open), []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -98,7 +95,7 @@ export function DeckProvider({ children }: { children: React.ReactNode }) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [next, prev]);
+  }, [next, prev, toggleMute]);
 
   const activeId = SECTION_IDS[activeIndex];
 

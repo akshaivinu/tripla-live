@@ -12,7 +12,8 @@ const TEASERS: Record<SectionId, string> = {
   luxury: "And dining extends every visit →",
   dining: "Entertainment is the ultimate anchor →",
   entertainment: "This is why brands activate here →",
-  events: "Now here's your place in it →",
+  events: "Choose your level of presence →",
+  sponsorship: "Ready to be part of this →",
   contact: "End of presentation",
 };
 

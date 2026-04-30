@@ -113,6 +113,7 @@ export default function CommercialSection() {
               className="absolute top-0 right-0 z-50 h-full w-full max-w-md bg-[#0a0a0a] border-l border-white/10 p-10 flex flex-col"
             >
               <button 
+              title="right"
                 onClick={() => setShowProjector(false)}
                 className="absolute top-8 right-8 text-white/40 hover:text-white transition-colors"
               >
@@ -155,6 +156,7 @@ export default function CommercialSection() {
                     <span className="text-[var(--gold)] font-bold text-lg">${avgTransaction}</span>
                   </div>
                   <input 
+                  title="content"
                     type="range" 
                     min="20" 
                     max="500" 
