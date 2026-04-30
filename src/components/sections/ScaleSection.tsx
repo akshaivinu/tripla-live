@@ -5,7 +5,7 @@ import { useEffect, useState, useRef } from "react";
 
 export default function ScaleSlide() {
   const [count, setCount] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function ScaleSlide() {
     <section className="relative h-full w-full overflow-hidden bg-black text-white">
 
       {/* VIDEO — left half on desktop */}
-      {!isMobile && (
+      {isMobile === false && (
         <div className="absolute inset-0 md:right-[45%] overflow-hidden hidden md:block">
           <video
             ref={videoRef}
@@ -53,7 +53,7 @@ export default function ScaleSlide() {
       )}
 
       {/* VIDEO — full-screen background on mobile */}
-      {isMobile && (
+      {isMobile === true && (
         <div className="absolute inset-0 md:hidden overflow-hidden">
           <video
             src="/assets/walkthrough.mp4"

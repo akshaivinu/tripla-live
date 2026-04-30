@@ -12,6 +12,7 @@ const contextMap: Record<string, { label: string; stat: string }> = {
   dining: { label: "Value: Dining", stat: "50+ Restaurants" },
   entertainment: { label: "Value: Attractions", stat: "55% Mix" },
   events: { label: "Proof: Events", stat: "Proven Event Platform" },
+  sponsorship: { label: "Sponsorship", stat: "Brand Partnerships" },
   contact: { label: "Next Steps", stat: "Leasing & Venue" },
 };
 
@@ -28,7 +29,7 @@ const ContextBar = memo(function ContextBar() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -12 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed top-8 left-10 z-[150] flex flex-col items-start text-left text-white/60"
+          className="fixed top-20 left-10 z-[150] flex flex-col items-start text-left text-white/60"
         >
           <span className="text-[11px] uppercase tracking-[0.12em] leading-[18px]">
             American Dream &mdash; Sales Platform
