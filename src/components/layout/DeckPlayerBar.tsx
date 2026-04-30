@@ -18,98 +18,61 @@ const TEASERS: Record<SectionId, string> = {
 };
 
 const DeckPlayerBar = memo(function DeckPlayerBar() {
-  const { activeIndex, totalSlides, next, prev } = useDeck();
+  const { activeIndex, totalSlides } = useDeck();
 
   const currentItem = SECTION_NAV_ITEMS[activeIndex];
-  const prevItem = SECTION_NAV_ITEMS[activeIndex - 1];
   const nextItem = SECTION_NAV_ITEMS[activeIndex + 1];
 
   return (
     <div className="fixed bottom-0 left-0 z-[200] w-full pointer-events-none">
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
 
-      <div className="relative flex w-full items-end justify-between px-10 pb-8 pt-16 pointer-events-none">
+      <div className="relative flex w-full items-end justify-between px-8 pb-6 pt-12 pointer-events-none">
+
+        {/* Left — current section only, no slide counter */}
         <motion.div
           key={`current-${activeIndex}`}
-          initial={false}
+          initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.4 }}
-          className="pointer-events-none text-left text-white/50"
+          className="pointer-events-none"
         >
-          <p className="text-[11px] uppercase tracking-[0.12em]">
-            Slide {activeIndex + 1} / {totalSlides}
+          <p className="text-[9px] uppercase tracking-[0.3em] text-white/25">
+            {currentItem?.label}
           </p>
-          <p className="mt-1 text-[11px] uppercase tracking-[0.12em]">{currentItem?.label}</p>
         </motion.div>
 
-        <div className="hidden md:flex items-center gap-2 pb-1">
+        {/* Center — progress dots only, no prev/next */}
+        <div className="flex items-center gap-2">
           {Array.from({ length: totalSlides }).map((_, idx) => (
             <motion.div
               key={idx}
-              layoutId={`dot-${idx}`}
               className={`h-px rounded-full transition-all duration-500 ${
-                idx === activeIndex ? "w-10 bg-[var(--gold)]" : "w-6 bg-white/20"
+                idx === activeIndex
+                  ? "w-8 bg-[var(--gold)]"
+                  : idx < activeIndex
+                  ? "w-4 bg-white/40"
+                  : "w-4 bg-white/15"
               }`}
             />
           ))}
         </div>
 
-        <div className="flex items-center gap-6">
-          <AnimatePresence mode="wait">
-            {prevItem ? (
-              <motion.button
-                key={`prev-${activeIndex}`}
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4 }}
-                onClick={prev}
-                className="pointer-events-auto text-[12px] uppercase tracking-[0.12em] text-white/50 transition-opacity hover:opacity-100 hover:text-white"
-              >
-                &larr; Prev
-              </motion.button>
-            ) : (
-              <span className="text-[12px] uppercase tracking-[0.12em] text-white/20">Start</span>
-            )}
-          </AnimatePresence>
-
-          <div className="flex flex-col items-end gap-1">
-            <AnimatePresence mode="wait">
-              {nextItem && (
-                <motion.p
-                  key={`teaser-${activeIndex}`}
-                  initial={{ opacity: 0, x: 10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -10 }}
-                  className="text-[9px] uppercase tracking-[0.2em] text-white/30 mb-1"
-                >
-                  {TEASERS[currentItem.id]}
-                </motion.p>
-              )}
-            </AnimatePresence>
-
-            <AnimatePresence mode="wait">
-              {nextItem ? (
-                <motion.button
-                  key={`next-${activeIndex}`}
-                  initial={false}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4 }}
-                  onClick={next}
-                  className="pointer-events-auto text-[12px] uppercase tracking-[0.12em] text-[var(--gold)] transition-opacity hover:opacity-80"
-                >
-                  Next &rarr;
-                </motion.button>
-              ) : (
-                <span className="text-[12px] uppercase tracking-[0.12em] text-[var(--gold)]/50">
-                  End Of Deck
-                </span>
-              )}
-            </AnimatePresence>
-          </div>
-        </div>
+        {/* Right — teaser line only, no next button */}
+        <AnimatePresence mode="wait">
+          {nextItem && (
+            <motion.p
+              key={`teaser-${activeIndex}`}
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -10 }}
+              transition={{ duration: 0.4 }}
+              className="text-[9px] uppercase tracking-[0.2em] text-white/25 pointer-events-none"
+            >
+              {TEASERS[currentItem.id]}
+            </motion.p>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
