@@ -28,7 +28,7 @@ export default function CommercialSection() {
   const projectedRevenue = 40000000 * selectedCat.conv * avgTransaction;
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black font-body">
+    <section className="relative h-screen w-full overflow-hidden bg-black font-body pt-20 pb-16">
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div
           className="absolute inset-0 bg-cover bg-center blur-[2px] scale-[1.04] opacity-80"
@@ -38,7 +38,7 @@ export default function CommercialSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/40 to-black/85" />
       </div>
 
-      <div className="relative z-10 flex h-full w-full items-center justify-center px-6">
+      <div className="relative z-10 flex h-full w-full items-center justify-center px-6 pt-20">
         <div className="flex w-full max-w-[1100px] flex-col items-center text-center">
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
@@ -51,7 +51,6 @@ export default function CommercialSection() {
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
             className="mt-3 text-[clamp(1.5rem,2.5vw,2.2rem)] font-light italic serif text-[var(--gold)]"
           >
             Every category. One platform.
@@ -61,9 +60,9 @@ export default function CommercialSection() {
             {BRANDS.map((brand, index) => (
               <motion.div
                 key={brand.name}
-                initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4 + index * 0.05 }}
+                style={{ willChange: "transform, opacity" }}
                 className="group relative h-32 flex flex-col items-center justify-center bg-white/[0.03] border border-white/5 rounded-xl hover:border-[var(--gold)]/40 hover:bg-white/[0.06] transition-all duration-500 cursor-default overflow-hidden"
               >
                 <span className="text-[10px] uppercase tracking-[0.2em] text-white font-bold group-hover:text-[var(--gold)] transition-colors">
@@ -80,7 +79,6 @@ export default function CommercialSection() {
           </div>
 
           <motion.button
-            initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
             onClick={() => setShowProjector(true)}

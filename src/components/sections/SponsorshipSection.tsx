@@ -56,16 +56,16 @@ export default function SponsorshipSlide() {
   const active = TIERS.find((t) => t.id === activeTier)!;
 
   return (
-    <section className="relative h-full w-full overflow-hidden bg-black text-white">
+    <section className="relative h-full w-full overflow-hidden bg-black text-white pt-20 pb-32">
       {/* Subtle video atmosphere */}
       <div className="absolute inset-0 opacity-15">
         <video src="/assets/commercial-ad.mp4" className="w-full h-full object-cover" autoPlay muted loop playsInline />
       </div>
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/90" />
 
-      <div className="relative z-10 h-full flex flex-col px-8 md:px-16 py-10 pb-28">
+      <div className="relative z-10 flex flex-col px-8 md:px-16 pt-20 pb-16">
         {/* Header */}
-        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
+        <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} style={{ willChange: "transform, opacity" }}>
           <p className="text-[10px] uppercase tracking-[0.4em] text-[var(--gold)] mb-3">Sponsorship & Brand Partnerships</p>
           <h2 className="text-[clamp(1.8rem,4vw,3.5rem)] font-bold uppercase leading-[1.05] tracking-[-0.02em]">
             Activate Inside
@@ -85,6 +85,7 @@ export default function SponsorshipSlide() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3 }}
+            style={{ willChange: "transform, opacity" }}
             className="flex md:flex-col gap-3"
           >
             {TIERS.map((tier) => (
@@ -109,6 +110,7 @@ export default function SponsorshipSlide() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
+            style={{ willChange: "transform, opacity" }}
             className="border border-white/8 rounded-xl p-6 md:p-8 flex flex-col justify-between"
           >
             <div>

@@ -31,7 +31,7 @@ export default function EventsSlide() {
   };
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black text-white">
+    <section className="relative h-screen w-full overflow-hidden bg-black text-white pt-20 pb-16">
       {/* FULL-SCREEN VIDEO — primary storytelling medium */}
       <div className="absolute inset-0">
         <video
@@ -55,6 +55,7 @@ export default function EventsSlide() {
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0 }}
+              style={{ willChange: "transform, opacity" }}
               className="text-[9px] uppercase tracking-[0.3em] text-white/40"
             >
               Tap to unmute
@@ -76,10 +77,11 @@ export default function EventsSlide() {
       </div>
 
       {/* CONTENT — anchored left, video visible on right */}
-      <div className="relative z-10 h-full flex flex-col justify-center px-8 md:px-16 pb-32">
+      <div className="relative z-10 h-full flex flex-col justify-center px-8 md:px-16 pb-32 pt-20">
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
+          style={{ willChange: "transform, opacity" }}
           className="text-[10px] uppercase tracking-[0.4em] text-[var(--gold)] mb-4"
         >
           Global Activation Platform
@@ -89,6 +91,7 @@ export default function EventsSlide() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
+          style={{ willChange: "transform, opacity" }}
           className="text-[clamp(2rem,5vw,4.5rem)] font-bold uppercase leading-[1.02] tracking-[-0.02em] max-w-xl"
         >
           Where Brands
@@ -102,6 +105,7 @@ export default function EventsSlide() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
+          style={{ willChange: "opacity" }}
           className="mt-6 text-sm text-white/60 leading-relaxed max-w-sm"
         >
           Launches, takeovers, broadcasts, and large-scale activations that convert attention into
@@ -113,6 +117,7 @@ export default function EventsSlide() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
+          style={{ willChange: "transform, opacity" }}
           className="mt-10 flex items-center gap-10"
         >
           <div>

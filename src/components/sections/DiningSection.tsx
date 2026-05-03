@@ -12,7 +12,7 @@ const DINING_CATEGORIES = [
 
 export default function DiningSlide() {
   return (
-    <section className="relative h-full w-full overflow-hidden bg-black text-white">
+    <section className="relative h-full w-full overflow-hidden bg-black text-white pt-20 pb-16">
 
       {/* VIDEO — full bleed, dimmed, sets atmosphere */}
       <div className="absolute inset-0">
@@ -30,7 +30,7 @@ export default function DiningSlide() {
       </div>
 
       {/* CONTENT */}
-      <div className="relative z-10 h-full grid md:grid-cols-2 items-center px-8 md:px-16 gap-10 pb-24 pt-10">
+      <div className="relative z-10 h-full grid md:grid-cols-2 items-center px-8 md:px-16 gap-10 pb-24 pt-20">
 
         {/* LEFT */}
         <div className="flex flex-col justify-center">

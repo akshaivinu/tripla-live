@@ -6,7 +6,7 @@ const BRANDS = ["Hermès", "Gucci", "Louis Vuitton", "Saint Laurent", "Balenciag
 
 export default function LuxurySlide() {
   return (
-    <section className="h-full w-full bg-black relative overflow-hidden text-white">
+    <section className="relative h-full w-full overflow-hidden bg-black text-white pt-20 pb-16">
 
       {/* VIDEO — right two-thirds, primary visual */}
       <div className="absolute inset-0 md:left-[38%] overflow-hidden">
@@ -36,7 +36,7 @@ export default function LuxurySlide() {
       </div>
 
       {/* CONTENT — left panel */}
-      <div className="relative z-10 h-full flex flex-col justify-center px-8 md:px-16 max-w-xl">
+      <div className="relative z-10 h-full flex flex-col justify-center px-8 md:px-16 max-w-xl pt-20">
 
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -73,10 +73,10 @@ export default function LuxurySlide() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="mt-10 border-l-2 border-[var(--gold)] pl-6"
+          className="mt-6 border-l-2 border-[var(--gold)] pl-6"
         >
-          <p className="text-[clamp(3rem,7vw,5rem)] font-bold text-[var(--gold)] leading-none">$850</p>
-          <p className="text-[10px] uppercase tracking-[0.4em] text-white/40 mt-2">Avg Spend Per Visit</p>
+          <p className="text-[clamp(2.5rem,6vw,4rem)] font-bold text-[var(--gold)] leading-none">$850</p>
+          <p className="text-[9px] uppercase tracking-[0.4em] text-white/40 mt-1">Avg Spend Per Visit</p>
         </motion.div>
 
         {/* Sub metrics */}
@@ -84,16 +84,16 @@ export default function LuxurySlide() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="mt-8 flex gap-10"
+          className="mt-6 flex gap-8"
         >
           <div>
-            <p className="text-2xl font-bold">48+</p>
-            <p className="text-[9px] uppercase tracking-[0.3em] text-white/30 mt-1">Luxury Brands</p>
+            <p className="text-xl font-bold">48+</p>
+            <p className="text-[8px] uppercase tracking-[0.3em] text-white/30 mt-1">Luxury Brands</p>
           </div>
           <div className="w-px bg-white/10" />
           <div>
-            <p className="text-2xl font-bold">#1</p>
-            <p className="text-[9px] uppercase tracking-[0.3em] text-white/30 mt-1">Luxury Corridor</p>
+            <p className="text-xl font-bold">#1</p>
+            <p className="text-[8px] uppercase tracking-[0.3em] text-white/30 mt-1">Luxury Corridor</p>
           </div>
         </motion.div>
 
@@ -102,7 +102,7 @@ export default function LuxurySlide() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="mt-10 flex flex-wrap gap-x-5 gap-y-2"
+          className="mt-6 flex flex-wrap gap-x-4 gap-y-1"
         >
           {BRANDS.map((b) => (
             <span key={b} className="text-[9px] uppercase tracking-[0.2em] text-white/20 hover:text-white/60 transition-colors cursor-default">

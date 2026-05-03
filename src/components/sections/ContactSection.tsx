@@ -8,7 +8,7 @@ import LeasingModal from "@/components/ui/LeasingModal";
 export default function ContactSlide() {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black text-white">
+    <section className="relative h-screen w-full overflow-hidden bg-black text-white pt-20 pb-16">
       {/* Background */}
       <div className="absolute inset-0">
         <Image
@@ -23,10 +23,9 @@ export default function ContactSlide() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center text-center px-6">
+      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center text-center px-6 pt-20">
         {/* Label */}
         <motion.p
-          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-[10px] uppercase tracking-[0.4em] text-[var(--gold)]"
@@ -57,7 +56,6 @@ export default function ContactSlide() {
         {/* Contact (Subtle CTA) */}
         <motion.button
           onClick={() => setIsOpen(true)}
-          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
           className="mt-12 px-10 py-4 bg-[var(--gold)] text-black font-bold uppercase tracking-[0.2em] text-xs rounded-full hover:scale-105 transition-all shadow-[0_10px_30px_rgba(201,169,110,0.3)]"

@@ -8,7 +8,7 @@ export default function Hero() {
   const { goToSlide } = useDeck();
 
   return (
-    <section className="relative h-full w-full flex items-center justify-center px-4 sm:px-6 md:px-10 bg-black overflow-hidden text-white">
+    <section className="relative h-full w-full flex items-center justify-center px-4 sm:px-6 md:px-10 bg-black overflow-hidden text-white pt-20 pb-32">
       {/* Background Video */}
       <div className="absolute inset-0 overflow-hidden">
         <video
@@ -22,25 +22,16 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/60 to-black/80" />
       </div>
 
-      {/* Top Meta (hidden on small screens automatically) */}
-      <motion.div
-        initial={{ opacity: 0, y: -8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="absolute top-4 left-4 sm:top-6 sm:left-6 md:top-8 md:left-10 hidden md:flex flex-col text-white/50 text-[10px] sm:text-[11px] uppercase tracking-[0.12em]"
-      >
-        <p>American Dream — Sales Platform</p>
-        <p className="mt-1">01 — The Hook</p>
-        <p className="mt-1">Key Metric: 40M Visitors</p>
-      </motion.div>
+
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-[960px] flex flex-col items-center text-center">
+      <div className="relative z-10 w-full max-w-[960px] flex flex-col items-center text-center pt-20">
         {/* Label */}
         <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6 }}
+          style={{ willChange: "opacity" }}
           className="text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-[var(--gold)]"
         >
           40 Million Visitors Annually
@@ -51,6 +42,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
+          style={{ willChange: "transform, opacity" }}
           className="
             mt-6 sm:mt-8
             text-[clamp(2rem,7vw,5rem)]
@@ -69,6 +61,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
+          style={{ willChange: "opacity" }}
           className="
             mt-4 sm:mt-6
             max-w-[90%] sm:max-w-md
@@ -84,6 +77,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
+          style={{ willChange: "opacity" }}
           className="
             mt-4 sm:mt-6
             text-[10px] sm:text-[11px]

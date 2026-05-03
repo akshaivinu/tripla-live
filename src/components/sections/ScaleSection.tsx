@@ -33,7 +33,7 @@ export default function ScaleSlide() {
   }, []);
 
   return (
-    <section className="relative h-full w-full overflow-hidden bg-black text-white">
+    <section className="relative h-full w-full overflow-hidden bg-black text-white pt-20 pb-16">
 
       {/* VIDEO — left half on desktop */}
       {isMobile === false && (
@@ -68,7 +68,7 @@ export default function ScaleSlide() {
       )}
 
       {/* CONTENT — right half on desktop */}
-      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center md:items-end px-6 md:pr-16 md:pl-0 text-center md:text-right">
+      <div className="relative z-10 flex h-full w-full flex-col items-center justify-center md:items-end px-6 md:pr-16 md:pl-0 text-center md:text-right pt-20">
         <div className="max-w-lg">
           <motion.p
             initial={{ opacity: 0, y: 10 }}

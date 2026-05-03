@@ -3,7 +3,6 @@
 import { DeckProvider } from "@/components/context/DeckContext";
 import DeckExperience from "@/components/DeckExperience";
 import DeckPlayerBar from "@/components/layout/DeckPlayerBar";
-import ContextBar from "@/components/layout/ContextBar";
 import Navigation from "@/components/layout/Navigation";
 
 // Dynamic imports for performance can still be used inside SLIDE_COMPONENTS mapping in DeckExperience if needed,
@@ -35,7 +34,6 @@ function ExperienceMain() {
           <div className="relative w-full h-full flex flex-col">
             {/* TOP CONTENT AREA (slides live here) */}
             <div className="flex-1 relative overflow-hidden">
-              <ContextBar />
               <Navigation />
               <DeckExperience />
             </div>

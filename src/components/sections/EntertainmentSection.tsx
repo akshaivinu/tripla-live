@@ -37,7 +37,7 @@ export default function EntertainmentSlide() {
   }, [isPaused]);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black text-white">
+    <section className="relative h-full w-full overflow-hidden bg-black text-white pt-20 pb-16">
       {/* Background Viewer */}
       <div className="absolute inset-0">
         <AnimatePresence mode="wait">
@@ -62,11 +62,12 @@ export default function EntertainmentSlide() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex h-full flex-col items-center pt-24 px-6 text-center">
+      <div className="relative z-10 flex h-full flex-col items-center justify-center pt-18 pb-48 px-6 text-center">
         {/* Label */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
+          style={{ willChange: "transform, opacity" }}
           className="text-[10px] uppercase tracking-[0.4em] text-[var(--gold)]"
         >
           Unfair Advantage
@@ -77,6 +78,7 @@ export default function EntertainmentSlide() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
+          style={{ willChange: "transform, opacity" }}
           className="mt-6 text-[clamp(5rem,12vw,10rem)] font-bold tracking-[-0.05em] text-[var(--gold)] leading-none"
         >
           55%
@@ -89,6 +91,7 @@ export default function EntertainmentSlide() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5 }}
+          style={{ willChange: "transform, opacity" }}
           className="mt-8 text-[clamp(1.4rem,3vw,2.2rem)] font-bold uppercase tracking-[0.12em] max-w-3xl"
         >
           This is not a mall.
@@ -97,7 +100,7 @@ export default function EntertainmentSlide() {
         </motion.h3>
 
         {/* Interactive Attraction Selectors */}
-        <div className="absolute bottom-40 md:bottom-32 flex gap-4 px-6 max-w-4xl overflow-x-auto no-scrollbar">
+        <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-4 px-6 w-full max-w-4xl overflow-x-auto no-scrollbar justify-center">
           {attractions.map((attr, idx) => (
             <motion.button
               key={attr.title}
@@ -127,15 +130,7 @@ export default function EntertainmentSlide() {
           ))}
         </div>
 
-        {/* Bottom Line */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="absolute bottom-24 text-[9px] uppercase tracking-[0.3em] text-zinc-500"
-        >
-          Click to explore our anchor attractions
-        </motion.p>
+
       </div>
     </section>
   );
